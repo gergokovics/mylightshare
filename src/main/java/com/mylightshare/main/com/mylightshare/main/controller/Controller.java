@@ -9,6 +9,6 @@ public class Controller {
 
     @GetMapping("/")
     public String index(Model model) {
-        return "index";
+        return "home";
     }
 }
