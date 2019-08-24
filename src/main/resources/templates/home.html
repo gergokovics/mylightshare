@@ -14,5 +14,14 @@
         Role sec: <span sec:authentication="principal.authorities"></span>
     </p>
 
+    <p>
+        <strong>User File</strong>
+        <div th:each="tempUserFile : ${userFiles}">
+            <div th:text="${tempUserFile.path}"></div>
+        </div>
+<!--        <div th:text="${userFile.path}"></div>-->
+
+    </p>
+
 </body>
 </html>
