@@ -39,8 +39,25 @@ public class UserFileServiceImpl  implements UserFileService {
     }
 
     @Override
+    public UserFile findByFilename(String filename) {
+
+        Optional<UserFile> result = userFileRepository.findByFilename(filename);
+
+        UserFile userFile = null;
+        if (result.isPresent()) {
+            userFile = result.get();
+        } else {
+            throw new RuntimeException("UserFile does not exist in the database with the filename: " + filename);
+        }
+
+        return userFile;
+    }
+
+    @Override
     public void save(UserFile userFile) {
+
         userFileRepository.save(userFile);
+
     }
 
     @Override

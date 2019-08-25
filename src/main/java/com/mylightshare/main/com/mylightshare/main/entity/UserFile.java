@@ -14,31 +14,47 @@ public class UserFile {
     @Column(name="username")
     private String username;
 
+    @Column(name="filename_original")
+    private String originalFilename;
+
     @Column(name="filename")
     private String filename;
 
-    @Column(name="path")
-    private String path;
+    @Column(name="url")
+    private String url;
+
+    @Column(name="public")
+    private boolean isPublic;
 
     @Column(name="uploaded")
-    private LocalDateTime upload;
+    private LocalDateTime uploaded;
 
     @Column(name="last_download")
     private LocalDateTime lastDownload;
 
     @Column(name="download_count")
-    private int downloadCount;
+    private int downloadCount = 0;
 
     public UserFile() {}
 
-    public UserFile(int id, String username, String filename, String path, LocalDateTime upload, LocalDateTime lastDownload, int downloadCount) {
+    public UserFile(int id, String username, String originalFilename, String filename, String url, boolean isPublic, LocalDateTime uploaded, LocalDateTime lastDownload, int downloadCount) {
         this.id = id;
         this.username = username;
+        this.originalFilename = originalFilename;
         this.filename = filename;
-        this.path = path;
-        this.upload = upload;
+        this.url = url;
+        this.isPublic = isPublic;
+        this.uploaded = uploaded;
         this.lastDownload = lastDownload;
         this.downloadCount = downloadCount;
+    }
+
+    public void incrementDownloadCount() {
+        downloadCount++;
+    }
+
+    public void incrementDownloadCount(int i) {
+        downloadCount += i;
     }
 
     public int getId() {
@@ -65,20 +81,20 @@ public class UserFile {
         this.filename = filename;
     }
 
-    public String getPath() {
-        return path;
+    public String getUrl() {
+        return url;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public LocalDateTime getUpload() {
-        return upload;
+    public LocalDateTime getUploaded() {
+        return uploaded;
     }
 
-    public void setUpload(LocalDateTime upload) {
-        this.upload = upload;
+    public void setUploaded(LocalDateTime uploaded) {
+        this.uploaded = uploaded;
     }
 
     public LocalDateTime getLastDownload() {
@@ -97,14 +113,32 @@ public class UserFile {
         this.downloadCount = downloadCount;
     }
 
+    public String getOriginalFilename() {
+        return originalFilename;
+    }
+
+    public void setOriginalFilename(String originalFilename) {
+        this.originalFilename = originalFilename;
+    }
+
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
+    }
+
     @Override
     public String toString() {
         return "UserFile{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
+                ", originalFilename='" + originalFilename + '\'' +
                 ", filename='" + filename + '\'' +
-                ", path='" + path + '\'' +
-                ", upload=" + upload +
+                ", URL='" + url + '\'' +
+                ", isPublic=" + isPublic +
+                ", upload=" + uploaded +
                 ", lastDownload=" + lastDownload +
                 ", downloadCount=" + downloadCount +
                 '}';

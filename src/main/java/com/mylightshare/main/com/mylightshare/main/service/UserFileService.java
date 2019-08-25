@@ -10,6 +10,8 @@ public interface UserFileService {
 
     UserFile findById(int id);
 
+    UserFile findByFilename(String filename);
+
     void save(UserFile userFile);
 
     void deleteById(int id);
