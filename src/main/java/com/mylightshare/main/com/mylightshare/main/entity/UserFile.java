@@ -23,6 +23,9 @@ public class UserFile {
     @Column(name="url")
     private String url;
 
+    @Column(name="url_id")
+    private String urlId;
+
     @Column(name="public")
     private boolean isPublic;
 
@@ -36,18 +39,6 @@ public class UserFile {
     private int downloadCount = 0;
 
     public UserFile() {}
-
-    public UserFile(int id, String username, String originalFilename, String filename, String url, boolean isPublic, LocalDateTime uploaded, LocalDateTime lastDownload, int downloadCount) {
-        this.id = id;
-        this.username = username;
-        this.originalFilename = originalFilename;
-        this.filename = filename;
-        this.url = url;
-        this.isPublic = isPublic;
-        this.uploaded = uploaded;
-        this.lastDownload = lastDownload;
-        this.downloadCount = downloadCount;
-    }
 
     public void incrementDownloadCount() {
         downloadCount++;
@@ -129,6 +120,14 @@ public class UserFile {
         isPublic = aPublic;
     }
 
+    public String getUrlId() {
+        return urlId;
+    }
+
+    public void setUrlId(String urlId) {
+        this.urlId = urlId;
+    }
+
     @Override
     public String toString() {
         return "UserFile{" +
@@ -136,9 +135,10 @@ public class UserFile {
                 ", username='" + username + '\'' +
                 ", originalFilename='" + originalFilename + '\'' +
                 ", filename='" + filename + '\'' +
-                ", URL='" + url + '\'' +
+                ", url='" + url + '\'' +
+                ", urlId='" + urlId + '\'' +
                 ", isPublic=" + isPublic +
-                ", upload=" + uploaded +
+                ", uploaded=" + uploaded +
                 ", lastDownload=" + lastDownload +
                 ", downloadCount=" + downloadCount +
                 '}';

@@ -12,6 +12,8 @@ public interface UserFileService {
 
     UserFile findByFilename(String filename);
 
+    UserFile findByUrlId(String urlId);
+
     void save(UserFile userFile);
 
     void deleteById(int id);

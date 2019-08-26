@@ -12,4 +12,6 @@ public interface UserFileRepository extends JpaRepository<UserFile, Integer> {
 
     Optional<UserFile> findByFilename(String filename);
 
+    Optional<UserFile> findByUrlId(String urlId);
+
 }
