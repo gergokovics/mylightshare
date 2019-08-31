@@ -8,7 +8,6 @@ $(document).ready(function() {
 
 });
 
-
 function removeFileURL(id) {
 
     $.ajax({

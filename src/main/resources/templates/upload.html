@@ -43,7 +43,10 @@
     <!-- BEGIN PLUGINS STYLES -->
     <link rel="stylesheet" href="assets/vendor/open-iconic/css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="assets/vendor/fontawesome/css/all.css">
-    <link rel="stylesheet" href="assets/vendor/flatpickr/flatpickr.min.css"><!-- END PLUGINS STYLES -->
+    <link rel="stylesheet" href="assets/vendor/flatpickr/flatpickr.min.css">
+    <link rel="stylesheet" href="assets/stylesheets/dropzone.css">
+    <link rel="stylesheet" href="assets/vendor/flatpickr/flatpickr.min.css">
+    <!-- END PLUGINS STYLES -->
     <!-- BEGIN THEME STYLES -->
     <link rel="stylesheet" href="assets/stylesheets/theme.min.css" data-skin="default">
     <link rel="stylesheet" href="assets/stylesheets/theme-dark.min.css" data-skin="dark">
@@ -305,107 +308,45 @@
                     <div class="page-section">
                         <!-- .section-block -->
                         <div class="section-block">
-                            <!-- metric row -->
-                            <div class="metric-row">
-                                <div class="col-lg-12">
-                                    <div class="metric-row metric-flush">
-                                        <!-- metric column -->
-                                        <div class="col">
-                                            <!-- .metric -->
-                                            <a href="user-teams.html" class="metric metric-bordered align-items-center">
-                                                <h2 class="metric-label"> Storage </h2>
-                                                <p class="metric-value h3">
-                                                    <sub><i class="oi oi-people"></i></sub> <span class="value">8</span>
-                                                </p>
-                                            </a> <!-- /.metric -->
-                                        </div><!-- /metric column -->
-                                        <!-- metric column -->
-                                        <div class="col">
-                                            <!-- .metric -->
-                                            <a href="user-projects.html" class="metric metric-bordered align-items-center">
-                                                <h2 class="metric-label"> Files </h2>
-                                                <p class="metric-value h3">
-                                                    <sub><i class="oi oi-fork"></i></sub> <span class="value">12</span>
-                                                </p>
-                                            </a> <!-- /.metric -->
-                                        </div><!-- /metric column -->
-                                        <!-- metric column -->
-                                        <div class="col">
-                                            <!-- .metric -->
-                                            <a href="user-tasks.html" class="metric metric-bordered align-items-center">
-                                                <h2 class="metric-label"> Downloads </h2>
-                                                <p class="metric-value h3">
-                                                    <sub><i class="fa fa-tasks"></i></sub> <span class="value">64</span>
-                                                </p>
-                                            </a> <!-- /.metric -->
-                                        </div><!-- /metric column -->
-                                    </div>
-                                </div><!-- metric column -->
-                            </div><!-- /metric row -->
-                        </div><!-- /.section-block -->
-                    </div><!-- /.page-section -->
-                    <!-- .page-section -->
-                    <div class="page-section">
-                        <!-- .section-block -->
-                        <div class="section-block">
-                            <header class="page-title-bar">
-                                <p class="lead">
-                                    <span>Recent uploads</span>
-                                </p>
-                            </header>
+                            <!-- page content goes here -->
+                            <div class="row justify-content-center">
+                                <div class="card" style="min-width:400px;min-height:220px">
+                                    <div id="upload-card-body" class="card-body">
+
+                                        <form class="dropzone" id="upload-form" method="POST" enctype="multipart/form-data" action="#" th:action="@{/upload}">
 
 
-                            <div class="row">
-                                <div th:each="userFile : ${userFiles}" th:id="${userFile.getId()} + '-card'" class="col" style="max-width: 320px; min-width: 320px">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h3 th:text="${userFile.getOriginalFilename()}" class="card-title"></h3>
-                                            <p class="card-text">
-                                                Size: - <br>
-                                                Downloads: <strong th:text="${userFile.getDownloadCount()}"></strong> <br>
-                                                Uploaded: <strong th:text="${userFile.getUploaded()}"></strong> <br>
-                                                Last Download: <strong th:text="${userFile.getLastDownload()}"></strong> <br>
-                                            </p>
+                                            <br>
 
-                                            <hr>
-
-                                            <div th:if="${userFile.getUrlId() == null}">
-                                                <strong hidden th:id="${userFile.getId()} + '-url-string'"></strong>
-
-                                                <hr hidden th:id="${userFile.getId()} + '-url-hr-tag'">
-
-                                                <button th:id="${userFile.getId()} + '-url-generate-btn'" th:attr="onclick=|generateFileURL('${userFile.getId()}')|" class="btn btn-info">Generate URL</button>
-                                                <button th:id="${userFile.getId()} + '-file-delete-btn'" th:attr="onclick=|deleteFile('${userFile.getId()}')|" class="btn btn-danger">Delete File</button>
-
+                                            <div class="dz-default dz-message">
+                                                <button type="button" id="upload-btn" class="btn btn-primary btn-lg">Select files to upload
+                                                </button>
+                                                <br><br>
+                                                <p class="text-muted">Or drag and drop files</p>
                                             </div>
 
-                                            <div th:if = "${userFile.getUrlId() != null}">
-                                                <strong th:id="${userFile.getId()} + '-url-string'" th:text="${userFile.getUrl()}"></strong>
+<!--                                            <div class="fallback">-->
 
-                                                <hr th:id="${userFile.getId()} + '-url-hr-tag'">
-
-                                                <button th:id="${userFile.getId()} + '-url-copy-btn'" th:attr="onclick=|copyTextToClipboard('${userFile.getUrl()}')|" class="btn btn-info">Copy URL</button>
-                                                <button th:id="${userFile.getId()} + '-url-remove-btn'" th:attr="onclick=|removeFileURL('${userFile.getId()}')|" class="btn btn-warning">Remove URL</button>
-
-                                            </div>
-
-
-                                        </div>
+<!--                                                <h2 class="card-title">Upload Files</h2>-->
+<!--                                                <div class="form-group">-->
+<!--                                                    <div class="custom-file">-->
+<!--                                                        <input type="file" class="custom-file-input"-->
+<!--                                                               name="files" id="customFile" multiple>-->
+<!--                                                        <label class="custom-file-label" for="customFile">Choose-->
+<!--                                                            files</label>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <input class="btn btn-primary" type="submit" value="Upload">-->
+<!--                                            </div>-->
+                                        </form>
 
                                     </div>
                                 </div>
                             </div>
-                        </div><!-- /.section-block -->
-                        <!-- .section-block -->
-                        <div class="section-block">
-                            <header class="page-title-bar">
-                                <p class="lead">
-                                    <span>Most Downloaded</span>
-                                </p>
-                            </header>
-                            Cards go here
-                        </div><!-- /.section-block -->
-                    </div><!-- /.page-section -->
+                        </div>
+                        <!-- /.section-block -->
+                    </div>
+                    <!-- /.page-section -->
                 </div><!-- /.page-inner -->
             </div><!-- /.page -->
         </div><!-- .app-footer -->
@@ -440,10 +381,11 @@
 <script src="assets/vendor/flatpickr/flatpickr.min.js"></script>
 <script src="assets/vendor/easy-pie-chart/jquery.easypiechart.min.js"></script>
 <script src="assets/vendor/chart.js/Chart.min.js"></script>
+<script src="assets/javascript/dropzone.js"></script>
 <!-- END PLUGINS JS -->
 <!-- BEGIN THEME JS -->
 <script src="assets/javascript/theme.min.js"></script> <!-- END THEME JS -->
 <!-- BEGIN PAGE LEVEL JS -->
-<script src="assets/javascript/pages/home.js"></script> <!-- END PAGE LEVEL JS -->
+<script src="assets/javascript/pages/upload.js"></script> <!-- END PAGE LEVEL JS -->
 </body>
 </html>

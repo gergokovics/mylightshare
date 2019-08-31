@@ -20,7 +20,7 @@ public class Controller {
         this.userFileService = userFileService;
     }
 
-    @GetMapping("/userdata")
+    @GetMapping("/")
     public String index(Model model, Authentication auth) {
 
         List<UserFile> userFiles = userFileService.findAllByUsername(auth.getName());
