@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface UserFileRepository extends JpaRepository<UserFile, Integer> {
 
-    List<UserFile> findByUsername(String username);
+    List<UserFile> findByUsernameIgnoreCase(String username);
 
     Optional<UserFile> findByFilename(String filename);
 

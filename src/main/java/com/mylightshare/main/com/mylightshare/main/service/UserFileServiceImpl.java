@@ -20,7 +20,7 @@ public class UserFileServiceImpl  implements UserFileService {
     @Override
     public List<UserFile> findAllByUsername(String user) {
 
-        return userFileRepository.findByUsername(user);
+        return userFileRepository.findByUsernameIgnoreCase(user);
     }
 
     @Override
