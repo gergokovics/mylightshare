@@ -1,9 +1,6 @@
 package com.mylightshare.main.com.mylightshare.main.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
@@ -12,6 +9,10 @@ import javax.validation.constraints.Size;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
+    private int id;
+
     @Column(name="username")
     @Size(min=4, max=12, message="Username length must be in between 4 and 12 characters.")
     private String username;
@@ -25,6 +26,14 @@ public class User {
 
     @Column(name="enabled")
     private boolean isEnabled;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;

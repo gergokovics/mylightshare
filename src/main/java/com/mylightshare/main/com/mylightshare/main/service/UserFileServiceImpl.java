@@ -16,13 +16,6 @@ public class UserFileServiceImpl  implements UserFileService {
         this.userFileRepository = userFileRepository;
     }
 
-
-    @Override
-    public List<UserFile> findAllByUsername(String user) {
-
-        return userFileRepository.findByUsernameIgnoreCase(user);
-    }
-
     @Override
     public UserFile findById(int id) {
 
@@ -37,6 +30,30 @@ public class UserFileServiceImpl  implements UserFileService {
 
         return userFile;
     }
+
+
+    @Override
+    public List<UserFile> findAllByUserId(int userId) {
+
+        return userFileRepository.findAllByUserId(userId);
+    }
+
+    @Override
+    public UserFile findByUserId(int id) {
+
+        Optional<UserFile> result = userFileRepository.findByUserId(id);
+
+        UserFile userFile = null;
+        if (result.isPresent()) {
+            userFile = result.get();
+        } else {
+            throw new RuntimeException("UserFile does not exist in the database with the userId: " + id);
+        }
+
+        return userFile;
+    }
+
+
 
     @Override
     public UserFile findByFilename(String filename) {

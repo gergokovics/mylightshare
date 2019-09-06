@@ -1,5 +1,7 @@
 package com.mylightshare.main.com.mylightshare.main.controller;
 
+import com.mylightshare.main.com.mylightshare.main.dao.UserRepository;
+import com.mylightshare.main.com.mylightshare.main.entity.User;
 import com.mylightshare.main.com.mylightshare.main.entity.UserFile;
 import com.mylightshare.main.com.mylightshare.main.exception.StorageFileNotFoundException;
 import com.mylightshare.main.com.mylightshare.main.service.StorageService;
@@ -18,16 +20,16 @@ import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDateTime;
 
 @Controller
-public class FileUploadController {
-
-    private final StorageService storageService;
-    private final UserFileService userFileService;
+public class FileController {
 
     @Autowired
-    public FileUploadController(StorageService storageService, UserFileService userFileService) {
-        this.storageService = storageService;
-        this.userFileService = userFileService;
-    }
+    private StorageService storageService;
+
+    @Autowired
+    private UserFileService userFileService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/upload")
     public String listUploadedFiles(Model model, Authentication auth) {
@@ -58,8 +60,10 @@ public class FileUploadController {
 
         try {
 
+            User user = userRepository.findByUsername(auth.getName());
+
             UserFile userFile = new UserFile();
-            userFile.setUsername(auth.getName());
+            userFile.setUserId(user.getId());
             userFile.setOriginalFilename(file.getOriginalFilename());
             userFile.setFilename(uniqueID);
             userFile.setUploaded(LocalDateTime.now());

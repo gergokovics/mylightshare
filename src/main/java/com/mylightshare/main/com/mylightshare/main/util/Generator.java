@@ -1,7 +1,7 @@
 package com.mylightshare.main.com.mylightshare.main.util;
 
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
-import com.mylightshare.main.com.mylightshare.main.controller.FileUploadController;
+import com.mylightshare.main.com.mylightshare.main.controller.FileController;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 public class Generator {
@@ -24,7 +24,7 @@ public class Generator {
 
     public static String getDownloadUrl() {
 
-        String Url = MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
+        String Url = MvcUriComponentsBuilder.fromMethodName(FileController.class,
                 "serveFile", getUniqueID()).toUriString();
 
         return Url;
@@ -32,7 +32,7 @@ public class Generator {
 
     public static String getDownloadUrl(String id) {
 
-        String Url = MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
+        String Url = MvcUriComponentsBuilder.fromMethodName(FileController.class,
                 "serveFile", id).toUriString();
 
         return Url;

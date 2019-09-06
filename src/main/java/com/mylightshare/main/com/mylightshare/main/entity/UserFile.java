@@ -11,8 +11,8 @@ public class UserFile {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="username")
-    private String username;
+    @Column(name="user_id")
+    private int userId;
 
     @Column(name="filename_original")
     private String originalFilename;
@@ -56,12 +56,12 @@ public class UserFile {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getFilename() {
@@ -132,7 +132,7 @@ public class UserFile {
     public String toString() {
         return "UserFile{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", userId='" + userId + '\'' +
                 ", originalFilename='" + originalFilename + '\'' +
                 ", filename='" + filename + '\'' +
                 ", url='" + url + '\'' +

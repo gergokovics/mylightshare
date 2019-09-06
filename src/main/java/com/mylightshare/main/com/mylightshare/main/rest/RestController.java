@@ -41,8 +41,6 @@ public class RestController {
 
         UserFile userFile = userFileService.findById(id);
 
-
-
         if (userFile != null) {
             userFile.setUrlId(null);
             userFile.setUrl(null);

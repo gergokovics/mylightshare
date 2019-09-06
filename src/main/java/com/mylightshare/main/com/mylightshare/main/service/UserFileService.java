@@ -6,9 +6,11 @@ import java.util.List;
 
 public interface UserFileService {
 
-    List<UserFile> findAllByUsername(String user);
-
     UserFile findById(int id);
+
+    List<UserFile> findAllByUserId(int userId);
+
+    UserFile findByUserId(int userId);
 
     UserFile findByFilename(String filename);
 

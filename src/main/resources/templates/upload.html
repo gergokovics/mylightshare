@@ -310,36 +310,36 @@
                         <div class="section-block">
                             <!-- page content goes here -->
                             <div class="row justify-content-center">
-                                <div class="card" style="min-width:400px;min-height:220px">
-                                    <div id="upload-card-body" class="card-body">
+                                <div class="col">
+                                    <div class="card" style="min-width:400px;min-height:220px">
+                                        <div id="upload-card-body" class="card-body">
 
-                                        <form class="dropzone" id="upload-form" method="POST" enctype="multipart/form-data" action="#" th:action="@{/upload}">
+                                                <form class="dropzone" id="upload-form" method="POST" enctype="multipart/form-data" action="#" th:action="@{/upload}">
 
+                                                    <br>
 
-                                            <br>
+                                                    <div class="dz-default dz-message">
+                                                        <button type="button" id="upload-btn" class="btn btn-primary btn-lg">Select files to upload
+                                                        </button>
+                                                        <br><br>
+                                                        <p class="text-muted">Or drag and drop files</p>
+                                                    </div>
 
-                                            <div class="dz-default dz-message">
-                                                <button type="button" id="upload-btn" class="btn btn-primary btn-lg">Select files to upload
-                                                </button>
-                                                <br><br>
-                                                <p class="text-muted">Or drag and drop files</p>
-                                            </div>
+        <!--                                            <div class="fallback">-->
 
-<!--                                            <div class="fallback">-->
-
-<!--                                                <h2 class="card-title">Upload Files</h2>-->
-<!--                                                <div class="form-group">-->
-<!--                                                    <div class="custom-file">-->
-<!--                                                        <input type="file" class="custom-file-input"-->
-<!--                                                               name="files" id="customFile" multiple>-->
-<!--                                                        <label class="custom-file-label" for="customFile">Choose-->
-<!--                                                            files</label>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-<!--                                                <input class="btn btn-primary" type="submit" value="Upload">-->
-<!--                                            </div>-->
-                                        </form>
-
+        <!--                                                <h2 class="card-title">Upload Files</h2>-->
+        <!--                                                <div class="form-group">-->
+        <!--                                                    <div class="custom-file">-->
+        <!--                                                        <input type="file" class="custom-file-input"-->
+        <!--                                                               name="files" id="customFile" multiple>-->
+        <!--                                                        <label class="custom-file-label" for="customFile">Choose-->
+        <!--                                                            files</label>-->
+        <!--                                                    </div>-->
+        <!--                                                </div>-->
+        <!--                                                <input class="btn btn-primary" type="submit" value="Upload">-->
+        <!--                                            </div>-->
+                                                </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

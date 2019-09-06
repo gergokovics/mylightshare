@@ -73,6 +73,8 @@ public class UserRegistrationController {
 
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
 
+        newUser.setEmail(newUser.getEmail().toLowerCase());
+
         userRepository.save(newUser);
 
         authorityRepository.save(new Authority(newUser.getUsername(), "ROLE_USER"));
@@ -119,7 +121,7 @@ public class UserRegistrationController {
         ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
 
         if (token != null) {
-            User user = userRepository.findByUsernameIgnoreCase(token.getUser().getUsername());
+            User user = userRepository.findByUsername(token.getUser().getUsername());
             user.setEnabled(true);
             userRepository.save(user);
             model.addAttribute("confirmMessage", "Your email has been verified!");
@@ -138,7 +140,7 @@ public class UserRegistrationController {
     private void validateCredentials(@Valid User user, BindingResult bindingResult) {
 
         // Check password length
-        if (user.getPassword().length() < 4 || user.getPassword().length() > 16) {
+        if (user.getPassword().length() < 6 || user.getPassword().length() > 20) {
             ObjectError error = new FieldError("user", "password", "Password length must be in between 6 and 20 characters.");
             bindingResult.addError(error);
         }
@@ -152,7 +154,7 @@ public class UserRegistrationController {
         }
 
         // Check if username exists
-        existingUser = userRepository.findByUsernameIgnoreCase(user.getUsername());
+        existingUser = userRepository.findByUsername(user.getUsername());
 
         if (existingUser != null) {
             ObjectError error = new FieldError("user", "username", "Username is taken. Please try another one.");
