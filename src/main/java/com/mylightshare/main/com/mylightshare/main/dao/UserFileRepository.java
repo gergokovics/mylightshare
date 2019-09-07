@@ -12,10 +12,23 @@ public interface UserFileRepository extends JpaRepository<UserFile, Integer> {
 
     Optional<UserFile> findByUserId(int userId);
 
-    List<UserFile> findAllByUserId(int userId);
-
     Optional<UserFile> findByFilename(String filename);
 
     Optional<UserFile> findByUrlId(String urlId);
+
+    List<UserFile> findAllByUserId(int userId);
+
+    // Search files
+    List<UserFile> findAllByUserIdAndSerializedFilenameLike(int userId, String searchValue);
+
+    // Sort files
+    List<UserFile> findByUserIdOrderByUploaded(int userId);
+    List<UserFile> findByUserIdOrderByUploadedDesc(int userId);
+
+    List<UserFile> findByUserIdOrderByDownloadCount(int userId);
+    List<UserFile> findByUserIdOrderByDownloadCountDesc(int userId);
+
+    List<UserFile> findByUserIdOrderByLastDownload(int userId);
+    List<UserFile> findByUserIdOrderByLastDownloadDesc(int userId);
 
 }

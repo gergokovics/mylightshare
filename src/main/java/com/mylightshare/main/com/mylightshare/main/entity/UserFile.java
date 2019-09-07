@@ -14,6 +14,9 @@ public class UserFile {
     @Column(name="user_id")
     private int userId;
 
+    @Column(name="filename_serialized")
+    private String serializedFilename;
+
     @Column(name="filename_original")
     private String originalFilename;
 
@@ -26,8 +29,8 @@ public class UserFile {
     @Column(name="url_id")
     private String urlId;
 
-    @Column(name="public")
-    private boolean isPublic;
+    @Column(name="serial_number")
+    private int serialNumber;
 
     @Column(name="uploaded")
     private LocalDateTime uploaded;
@@ -62,6 +65,14 @@ public class UserFile {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getSerializedFilename() {
+        return serializedFilename;
+    }
+
+    public void setSerializedFilename(String serializedFilename) {
+        this.serializedFilename = serializedFilename;
     }
 
     public String getFilename() {
@@ -112,12 +123,12 @@ public class UserFile {
         this.originalFilename = originalFilename;
     }
 
-    public boolean isPublic() {
-        return isPublic;
+    public int getSerialNumber() {
+        return serialNumber;
     }
 
-    public void setPublic(boolean aPublic) {
-        isPublic = aPublic;
+    public void setSerialNumber(int serialNumber) {
+        this.serialNumber = serialNumber;
     }
 
     public String getUrlId() {
@@ -137,7 +148,7 @@ public class UserFile {
                 ", filename='" + filename + '\'' +
                 ", url='" + url + '\'' +
                 ", urlId='" + urlId + '\'' +
-                ", isPublic=" + isPublic +
+                ", serialNumber=" + serialNumber +
                 ", uploaded=" + uploaded +
                 ", lastDownload=" + lastDownload +
                 ", downloadCount=" + downloadCount +

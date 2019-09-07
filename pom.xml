@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.mylightshare</groupId>
 	<artifactId>main</artifactId>
-	<version>0.6.0-SNAPSHOT</version>
+	<version>0.7.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>main</name>
 	<description>File Sharing System</description>

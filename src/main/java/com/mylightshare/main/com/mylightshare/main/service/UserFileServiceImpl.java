@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserFileServiceImpl  implements UserFileService {
+public class UserFileServiceImpl implements UserFileService {
 
     private UserFileRepository userFileRepository;
 
@@ -31,12 +31,6 @@ public class UserFileServiceImpl  implements UserFileService {
         return userFile;
     }
 
-
-    @Override
-    public List<UserFile> findAllByUserId(int userId) {
-
-        return userFileRepository.findAllByUserId(userId);
-    }
 
     @Override
     public UserFile findByUserId(int id) {
@@ -83,6 +77,48 @@ public class UserFileServiceImpl  implements UserFileService {
         }
 
         return userFile;
+    }
+
+    @Override
+    public List<UserFile> findAllByUserId(int userId) {
+
+        return userFileRepository.findAllByUserId(userId);
+    }
+
+    @Override
+    public List<UserFile> findAllByUserIdAndSerializedFilenameLike(int userId, String searchValue) {
+
+        return userFileRepository.findAllByUserIdAndSerializedFilenameLike(userId, searchValue);
+    }
+
+    @Override
+    public List<UserFile> findByUserIdOrderByUploaded(int userId) {
+        return userFileRepository.findByUserIdOrderByUploaded(userId);
+    }
+
+    @Override
+    public List<UserFile> findByUserIdOrderByUploadedDesc(int userId) {
+        return userFileRepository.findByUserIdOrderByUploadedDesc(userId);
+    }
+
+    @Override
+    public List<UserFile> findByUserIdOrderByDownloadCount(int userId) {
+        return userFileRepository.findByUserIdOrderByDownloadCount(userId);
+    }
+
+    @Override
+    public List<UserFile> findByUserIdOrderByDownloadCountDesc(int userId) {
+        return userFileRepository.findByUserIdOrderByDownloadCountDesc(userId);
+    }
+
+    @Override
+    public List<UserFile> findByUserIdOrderByLastDownload(int userId) {
+        return userFileRepository.findByUserIdOrderByLastDownload(userId);
+    }
+
+    @Override
+    public List<UserFile> findByUserIdOrderByLastDownloadDesc(int userId) {
+        return userFileRepository.findByUserIdOrderByLastDownloadDesc(userId);
     }
 
     @Override

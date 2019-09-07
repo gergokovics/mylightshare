@@ -44,7 +44,6 @@ public class RestController {
         if (userFile != null) {
             userFile.setUrlId(null);
             userFile.setUrl(null);
-            userFile.setPublic(false);
 
             userFileService.save(userFile);
 
