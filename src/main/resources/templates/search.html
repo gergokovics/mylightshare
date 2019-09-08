@@ -251,55 +251,13 @@
                                     <span>Search results</span>
                                 </p>
                             </header>
-
-                            <div class="row">
-                                <div th:each="userFile : ${userFiles}" th:id="${userFile.getId()} + '-card'" class="col" style="max-width: 320px; min-width: 320px">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h3 th:text="${userFile.getSerializedFilename()}" class="card-title"></h3>
-                                            <p class="card-text">
-                                                Size: - <br>
-                                                Downloads: <strong th:text="${userFile.getDownloadCount()}"></strong> <br>
-                                                Uploaded: <strong th:text="${userFile.getUploaded()}"></strong> <br>
-                                                Last Download: <strong th:text="${userFile.getLastDownload()}"></strong> <br>
-                                            </p>
-
-                                            <hr>
-
-                                            <div th:if="${userFile.getUrlId() == null}">
-                                                <strong hidden th:id="${userFile.getId()} + '-url-string'"></strong>
-
-                                                <hr hidden th:id="${userFile.getId()} + '-url-hr-tag'">
-
-                                                <button th:id="${userFile.getId()} + '-url-generate-btn'" th:attr="onclick=|generateFileURL('${userFile.getId()}')|" class="btn btn-info">Generate URL</button>
-                                                <button th:id="${userFile.getId()} + '-file-delete-btn'" th:attr="onclick=|deleteFile('${userFile.getId()}')|" class="btn btn-danger">Delete File</button>
-
-                                            </div>
-
-                                            <div th:if = "${userFile.getUrlId() != null}">
-                                                <strong th:id="${userFile.getId()} + '-url-string'" th:text="${userFile.getUrl()}"></strong>
-
-                                                <hr th:id="${userFile.getId()} + '-url-hr-tag'">
-
-                                                <button th:id="${userFile.getId()} + '-url-copy-btn'" th:attr="onclick=|copyTextToClipboard('${userFile.getUrl()}')|" class="btn btn-info">Copy URL</button>
-                                                <button th:id="${userFile.getId()} + '-url-remove-btn'" th:attr="onclick=|removeFileURL('${userFile.getId()}')|" class="btn btn-warning">Remove URL</button>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
+                            <div class="file-container row">
+                                <!-- Auto load elements (infinite-scroll) -->
                             </div>
-                        </div><!-- /.section-block -->
-                        <!-- .section-block -->
-                        <div class="section-block">
-                            <header class="page-title-bar">
-                                <p class="lead">
-                                    <span>Most Downloaded</span>
-                                </p>
-                            </header>
-                            Cards go here
+
+                            <div class="page-load-status row justify-content-center">
+                                <p class="infinite-scroll-request">Loading...</p>
+                            </div>
                         </div><!-- /.section-block -->
                     </div><!-- /.page-section -->
                 </div><!-- /.page-inner -->
@@ -336,9 +294,13 @@
 <script src="assets/vendor/flatpickr/flatpickr.min.js"></script>
 <script src="assets/vendor/easy-pie-chart/jquery.easypiechart.min.js"></script>
 <script src="assets/vendor/chart.js/Chart.min.js"></script>
+<script src="assets/javascript/pages/userfile-interface.js"></script>
+<script src="assets/javascript/pages/files.js"></script>
+<script src="assets/javascript/infinite-scroll.pkgd.min.js"></script>
 <!-- END PLUGINS JS -->
 <!-- BEGIN THEME JS -->
-<script src="assets/javascript/theme.min.js"></script> <!-- END THEME JS -->
+<script src="assets/javascript/theme.min.js"></script>
+<!-- END THEME JS -->
 <!-- BEGIN PAGE LEVEL JS -->
 <!-- END PAGE LEVEL JS -->
 </body>

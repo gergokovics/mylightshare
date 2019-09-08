@@ -39,6 +39,8 @@ public class FileController {
         return "upload";
     }
 
+    private List<UserFile> userFiles;
+
     @PostMapping("/upload")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
                                    Authentication auth) {
@@ -82,12 +84,41 @@ public class FileController {
 
         User user = userRepository.findByUsername(auth.getName());
 
-        List<UserFile> searchResult = userFileService.findAllByUserIdAndSerializedFilenameLike(user.getId(), "%" + term + "%");
+        userFiles = userFileService.findAllByUserIdAndSerializedFilenameLike(user.getId(), "%" + term + "%");
 
-        model.addAttribute("userFiles", searchResult);
+        model.addAttribute("userFiles", userFiles);
 
         return "search";
 
+    }
+
+    // Get files page
+    @GetMapping("/files/page={pageNumber}")
+    public String filePage(@PathVariable int pageNumber, Model model) {
+
+        pageNumber -= 1;
+
+        System.out.println("Page num: " + pageNumber);
+
+        final int elementPerPage = 15;
+
+        int batchStartIndex = pageNumber * elementPerPage;
+        int batchEndIndex = batchStartIndex + (elementPerPage);
+
+        if (batchStartIndex > userFiles.size()) {
+            return "file-page-end";
+        }
+
+        List<UserFile> userFilesBatch;
+        if (userFiles.size() > batchEndIndex) {
+            userFilesBatch = userFiles.subList(batchStartIndex, batchEndIndex);
+        } else {
+            userFilesBatch = userFiles.subList(batchStartIndex, userFiles.size());
+        }
+
+        model.addAttribute("userFiles", userFilesBatch);
+
+        return "file-page";
     }
 
     // Sort files
@@ -100,8 +131,6 @@ public class FileController {
 
         SortForm sortFeedback = new SortForm("upload-time", "desc");
 
-        List<UserFile> userFiles;
-
         String sortAndOrderMode;
         if (sort != null && order != null) {
              sortAndOrderMode = sort + "-" + order;
@@ -112,7 +141,7 @@ public class FileController {
             sortAndOrderMode = "upload-time-desc";
         }
 
-        // TODO implement cleaner way to sort
+        // TODO implement cleaner way to sort files
         switch (sortAndOrderMode) {
             case "upload-time-asc": {
                 userFiles = userFileService.findByUserIdOrderByUploaded(user.getId());
@@ -143,8 +172,15 @@ public class FileController {
             }
         }
 
+        List<UserFile> userFilesBatch;
 
-        model.addAttribute("userFiles", userFiles);
+        if (userFiles.size() > 15) {
+            userFilesBatch = userFiles.subList(0, 15);
+        } else {
+            userFilesBatch = userFiles;
+        }
+
+        model.addAttribute("userFiles", userFilesBatch);
         model.addAttribute("sortForm", sortFeedback);
 
         return "files";

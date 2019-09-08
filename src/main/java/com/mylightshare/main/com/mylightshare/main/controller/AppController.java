@@ -30,9 +30,13 @@ public class AppController {
 
         User user = userRepository.findByUsername(auth.getName());
 
-        List<UserFile> userFiles = userFileService.findAllByUserId(user.getId());
+        List<UserFile> userFiles = userFileService.findByUserIdOrderByDownloadCountDesc(user.getId());
 
-        model.addAttribute("userFiles", userFiles);
+        model.addAttribute("popularUserFiles", userFiles.subList(0,8));
+
+        userFiles = userFileService.findAllByUserId(user.getId());
+
+        model.addAttribute("recentUserFiles", userFiles.subList(0, 12));
 
         return "home";
     }
