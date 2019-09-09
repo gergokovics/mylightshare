@@ -22,8 +22,8 @@ public interface UserFileRepository extends JpaRepository<UserFile, Integer> {
     List<UserFile> findAllByUserIdAndSerializedFilenameLike(int userId, String searchValue);
 
     // Sort files
-    List<UserFile> findByUserIdOrderByUploaded(int userId);
-    List<UserFile> findByUserIdOrderByUploadedDesc(int userId);
+    List<UserFile> findByUserIdOrderByUploadTime(int userId);
+    List<UserFile> findByUserIdOrderByUploadTimeDesc(int userId);
 
     List<UserFile> findByUserIdOrderByDownloadCount(int userId);
     List<UserFile> findByUserIdOrderByDownloadCountDesc(int userId);

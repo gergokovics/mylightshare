@@ -5,6 +5,8 @@ import com.mylightshare.main.com.mylightshare.main.entity.User;
 import com.mylightshare.main.com.mylightshare.main.entity.UserFile;
 import com.mylightshare.main.com.mylightshare.main.exception.StorageFileNotFoundException;
 import com.mylightshare.main.com.mylightshare.main.formview.SortForm;
+import com.mylightshare.main.com.mylightshare.main.modelattribute.UserFileModelAttribute;
+import com.mylightshare.main.com.mylightshare.main.modelattribute.UserModelAttribute;
 import com.mylightshare.main.com.mylightshare.main.service.StorageService;
 import com.mylightshare.main.com.mylightshare.main.service.UserFileService;
 import com.mylightshare.main.com.mylightshare.main.util.Generator;
@@ -12,6 +14,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -42,9 +46,9 @@ public class FileController {
     private List<UserFile> userFiles;
 
     @PostMapping("/upload")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file,
-                                   Authentication auth) {
-
+    @ResponseBody
+    public ResponseEntity<Object> handleFileUpload(@RequestParam("file") MultipartFile file,
+                                                        Authentication auth) throws RuntimeException{
 
         String uniqueID = Generator.getUniqueID();
 
@@ -52,16 +56,41 @@ public class FileController {
 
             User user = userRepository.findByUsername(auth.getName());
 
+            // Check if user have enough storage space
+            long storageSpaceLeft =  user.getStorageSpace() - file.getSize();
+
+            if (storageSpaceLeft < 0) {
+
+                long storageNeeded = Math.abs(storageSpaceLeft);
+
+                String errorJsonMessage = "Insufficient storage space ("+Generator.formatFileSize(storageNeeded, 2)+" is needed).";
+
+                return ResponseEntity.status(HttpStatus.INSUFFICIENT_STORAGE)
+                        .header(HttpHeaders.CONTENT_TYPE, "text/plain").body(errorJsonMessage);
+
+
+            } else {
+                user.setStorageSpace(storageSpaceLeft);
+            }
+
             UserFile userFile = new UserFile();
             userFile.setUserId(user.getId());
+
             userFile.setOriginalFilename(file.getOriginalFilename());
             userFile.setFilename(uniqueID);
-            userFile.setUploaded(LocalDateTime.now());
+
+            userFile.setSize(file.getSize());
+
+            userFile.setUploadTime(LocalDateTime.now());
 
             userFile.setUrlId(uniqueID);
             userFile.setUrl(Generator.getDownloadUrl(uniqueID));
 
             serializeFile(userFile, file);
+
+            user.incrementFileCount();
+
+            userRepository.save(user);
 
             userFileService.save(userFile);
 
@@ -73,9 +102,7 @@ public class FileController {
             throw new RuntimeException("Failed to save user file");
         }
 
-
-
-        return "redirect:/";
+        return ResponseEntity.ok("Successful upload");
     }
 
     // Search file
@@ -83,10 +110,15 @@ public class FileController {
     public String search(@RequestParam("term") String term, Model model, Authentication auth) {
 
         User user = userRepository.findByUsername(auth.getName());
-
         userFiles = userFileService.findAllByUserIdAndSerializedFilenameLike(user.getId(), "%" + term + "%");
 
-        model.addAttribute("userFiles", userFiles);
+        List<UserFileModelAttribute> userFileModelAttributes = convertToAttributes(userFiles);
+
+        model.addAttribute("userFiles", userFileModelAttributes);
+
+        UserModelAttribute userModelAttribute = new UserModelAttribute(user);
+
+        model.addAttribute("user", userModelAttribute);
 
         return "search";
 
@@ -94,11 +126,9 @@ public class FileController {
 
     // Get files page
     @GetMapping("/files/page={pageNumber}")
-    public String filePage(@PathVariable int pageNumber, Model model) {
+    public String filePage(@PathVariable int pageNumber, Model model, Authentication auth) {
 
         pageNumber -= 1;
-
-        System.out.println("Page num: " + pageNumber);
 
         final int elementPerPage = 15;
 
@@ -106,7 +136,7 @@ public class FileController {
         int batchEndIndex = batchStartIndex + (elementPerPage);
 
         if (batchStartIndex > userFiles.size()) {
-            return "file-page-end";
+            return "file-card-end";
         }
 
         List<UserFile> userFilesBatch;
@@ -116,9 +146,17 @@ public class FileController {
             userFilesBatch = userFiles.subList(batchStartIndex, userFiles.size());
         }
 
-        model.addAttribute("userFiles", userFilesBatch);
+        List<UserFileModelAttribute> userFileModelAttributes = convertToAttributes(userFilesBatch);
 
-        return "file-page";
+        model.addAttribute("userFiles", userFileModelAttributes);
+
+        User user = userRepository.findByUsername(auth.getName());
+
+        UserModelAttribute userModelAttribute = new UserModelAttribute(user);
+
+        model.addAttribute("user", userModelAttribute);
+
+        return "file-card";
     }
 
     // Sort files
@@ -180,8 +218,14 @@ public class FileController {
             userFilesBatch = userFiles;
         }
 
-        model.addAttribute("userFiles", userFilesBatch);
+        List<UserFileModelAttribute> userFileModelAttributes = convertToAttributes(userFilesBatch);
+
+        model.addAttribute("userFiles", userFileModelAttributes);
         model.addAttribute("sortForm", sortFeedback);
+
+        UserModelAttribute userModelAttribute = new UserModelAttribute(user);
+
+        model.addAttribute("user", userModelAttribute);
 
         return "files";
     }
@@ -194,7 +238,19 @@ public class FileController {
 
         UserFile userFile = userFileService.findByUrlId(urlId);
 
+        userFile.setLastDownload(LocalDateTime.now());
+
+        userFile.incrementDownloadCount();
+
+        userFileService.save(userFile);
+
         Resource file = storageService.loadAsResource(userFile.getFilename());
+
+        User user = userRepository.findById(userFile.getUserId());
+
+        user.incrementDownloadCount();
+
+        userRepository.save(user);
 
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=\"" + userFile.getSerializedFilename() + "\"").body(file);
@@ -206,15 +262,29 @@ public class FileController {
 
         UserFile userFile = userFileService.findById(id);
 
-        boolean deleted = storageService.delete(userFile.getFilename());
+        boolean isDeleted = storageService.delete(userFile.getFilename());
 
-        if (deleted) {
-            userFileService.deleteById(id);
-            return "Successfully deleted file with id: " + id;
+        if (!isDeleted) {
+            return "Failed to delete file";
         }
 
+        userFileService.deleteById(id);
 
-        return "Failed to delete file";
+        // Free up storage space
+
+        User user = userRepository.findById(userFile.getUserId());
+        long updatedStorageSpace = user.getStorageSpace() + userFile.getSize();
+        user.setStorageSpace(updatedStorageSpace);
+
+        // Update user data
+        user.decrementFileCount();
+
+        userRepository.save(user);
+
+        return "Successfully deleted file with id: " + id;
+
+
+
     }
 
     @ExceptionHandler(StorageFileNotFoundException.class)
@@ -248,6 +318,17 @@ public class FileController {
 
         userFile.setSerializedFilename(serializedFilename);
 
+    }
+
+    private List<UserFileModelAttribute> convertToAttributes(List<UserFile> userFiles) {
+
+        List<UserFileModelAttribute> userFileModelAttributes = new ArrayList<>();
+
+        for (UserFile userFile : userFiles) {
+            userFileModelAttributes.add(new UserFileModelAttribute(userFile));
+        }
+
+        return userFileModelAttributes;
     }
 
 }

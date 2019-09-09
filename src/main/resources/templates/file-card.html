@@ -5,19 +5,17 @@
          style="max-width: 320px; min-width: 320px">
         <div class="card">
             <div class="card-body">
-                <h3 th:text="${userFile.getSerializedFilename()}" class="card-title"></h3>
+                <h3 th:text="${userFile.getFilename()}" class="card-title"></h3>
                 <p class="card-text">
-                    Size: - <br>
-                    Downloads: <strong th:text="${userFile.getDownloadCount()}"></strong>
-                    <br>
-                    Uploaded: <strong th:text="${userFile.getUploaded()}"></strong> <br>
-                    Last Download: <strong th:text="${userFile.getLastDownload()}"></strong>
-                    <br>
+                    Size: <strong th:text="${userFile.getSize()}"></strong><br>
+                    Downloads: <strong th:text="${userFile.getDownloadCount()}"></strong> <br>
+                    Uploaded: <strong th:text="${userFile.getUploadTime()}"></strong> <br>
+                    Last Download: <strong th:text="${userFile.getLastDownload()}"></strong> <br>
                 </p>
 
                 <hr>
 
-                <div th:if="${userFile.getUrlId() == null}">
+                <div th:if="${userFile.getUrl() == null}">
                     <strong hidden th:id="${userFile.getId()} + '-url-string'"></strong>
 
                     <hr hidden th:id="${userFile.getId()} + '-url-hr-tag'">
@@ -33,7 +31,7 @@
 
                 </div>
 
-                <div th:if="${userFile.getUrlId() != null}">
+                <div th:if="${userFile.getUrl() != null}">
                     <strong th:id="${userFile.getId()} + '-url-string'"
                             th:text="${userFile.getUrl()}"></strong>
 

@@ -20,6 +20,8 @@ import java.util.stream.Stream;
 @Service
 public class FileSystemStorageService implements StorageService {
 
+    public static final long DEFAULT_USER_STORAGE_SPACE = 1074000000; // 1 GibiByte
+
     private final Path rootLocation;
 
     @Autowired

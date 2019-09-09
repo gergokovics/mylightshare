@@ -64,6 +64,10 @@
     <!--[if lt IE 10]>
     <div class="page-message" role="alert">You are using an <strong>outdated</strong> browser. Please <a class="alert-link" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</div>
     <![endif]-->
+
+    <div th:if="${message}" class="page-message" role="alert">
+        <span th:text="${message}"></span><a href="#" class="btn btn-sm btn-icon btn-warning ml-1" aria-label="Close" onclick="$(this).parent().fadeOut()"><span aria-hidden="true"><i class="fa fa-times"></i></span></a>
+    </div>
     <!-- .app-header -->
     <header class="app-header app-header-dark">
         <!-- .top-bar -->
@@ -319,25 +323,26 @@
                                                     <br>
 
                                                     <div class="dz-default dz-message">
-                                                        <button type="button" id="upload-btn" class="btn btn-primary btn-lg">Select files to upload
+                                                        <button type="button" id="upload-btn" class="btn btn-primary btn-lg">
+                                                            Select files to upload
                                                         </button>
                                                         <br><br>
                                                         <p class="text-muted">Or drag and drop files</p>
                                                     </div>
 
-        <!--                                            <div class="fallback">-->
+                                                    <div class="fallback">
 
-        <!--                                                <h2 class="card-title">Upload Files</h2>-->
-        <!--                                                <div class="form-group">-->
-        <!--                                                    <div class="custom-file">-->
-        <!--                                                        <input type="file" class="custom-file-input"-->
-        <!--                                                               name="files" id="customFile" multiple>-->
-        <!--                                                        <label class="custom-file-label" for="customFile">Choose-->
-        <!--                                                            files</label>-->
-        <!--                                                    </div>-->
-        <!--                                                </div>-->
-        <!--                                                <input class="btn btn-primary" type="submit" value="Upload">-->
-        <!--                                            </div>-->
+                                                        <h2 class="card-title">Upload Files</h2>
+                                                        <div class="form-group">
+                                                            <div class="custom-file">
+                                                                <input type="file" class="custom-file-input"
+                                                                       name="files" id="customFile" multiple>
+                                                                <label class="custom-file-label" for="customFile">Choose
+                                                                    files</label>
+                                                            </div>
+                                                        </div>
+                                                        <input class="btn btn-primary" type="submit" value="Upload">
+                                                    </div>
                                                 </form>
                                         </div>
                                     </div>

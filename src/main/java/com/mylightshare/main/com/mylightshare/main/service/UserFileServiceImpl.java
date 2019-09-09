@@ -93,12 +93,12 @@ public class UserFileServiceImpl implements UserFileService {
 
     @Override
     public List<UserFile> findByUserIdOrderByUploaded(int userId) {
-        return userFileRepository.findByUserIdOrderByUploaded(userId);
+        return userFileRepository.findByUserIdOrderByUploadTime(userId);
     }
 
     @Override
     public List<UserFile> findByUserIdOrderByUploadedDesc(int userId) {
-        return userFileRepository.findByUserIdOrderByUploadedDesc(userId);
+        return userFileRepository.findByUserIdOrderByUploadTimeDesc(userId);
     }
 
     @Override

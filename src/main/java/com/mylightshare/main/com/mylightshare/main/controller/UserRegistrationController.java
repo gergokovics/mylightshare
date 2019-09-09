@@ -7,6 +7,7 @@ import com.mylightshare.main.com.mylightshare.main.entity.Authority;
 import com.mylightshare.main.com.mylightshare.main.entity.ConfirmationToken;
 import com.mylightshare.main.com.mylightshare.main.entity.User;
 import com.mylightshare.main.com.mylightshare.main.service.EmailSenderService;
+import com.mylightshare.main.com.mylightshare.main.service.FileSystemStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -69,12 +70,14 @@ public class UserRegistrationController {
                 System.out.println(error.toString());
             }
             return "register";
+
         }
 
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
 
         newUser.setEmail(newUser.getEmail().toLowerCase());
 
+        newUser.setStorageSpace(FileSystemStorageService.DEFAULT_USER_STORAGE_SPACE);
         userRepository.save(newUser);
 
         authorityRepository.save(new Authority(newUser.getUsername(), "ROLE_USER"));
@@ -82,6 +85,7 @@ public class UserRegistrationController {
         ConfirmationToken confirmationToken = new ConfirmationToken(newUser);
 
         confirmationTokenRepository.save(confirmationToken);
+
 
         try {
             createConfirmMessage(newUser, confirmationToken);
@@ -125,10 +129,8 @@ public class UserRegistrationController {
             user.setEnabled(true);
             userRepository.save(user);
             model.addAttribute("confirmMessage", "Your email has been verified!");
-            System.out.println("Verified email!");
         } else {
             model.addAttribute("confirmMessage", "Invalid token!");
-            System.out.println("Invalid token!");
         }
 
         redirectAttributes.addFlashAttribute("message",

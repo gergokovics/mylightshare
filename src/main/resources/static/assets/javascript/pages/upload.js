@@ -1,9 +1,10 @@
 
 Dropzone.options.uploadForm = {
 
+    parallelUploads: 1,
     createImageThumbnails: false,
     paramName: "file",
-    maxFilesize: 10, // MB
+    maxFilesize: 30, // MB
     maxFiles: 15,
     dictMaxFilesExceeded: "You can't upload any more files in this batch.",
 

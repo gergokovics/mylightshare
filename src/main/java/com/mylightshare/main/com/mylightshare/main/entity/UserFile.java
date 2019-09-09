@@ -23,6 +23,9 @@ public class UserFile {
     @Column(name="filename")
     private String filename;
 
+    @Column(name ="size")
+    private long size;
+
     @Column(name="url")
     private String url;
 
@@ -32,8 +35,8 @@ public class UserFile {
     @Column(name="serial_number")
     private int serialNumber;
 
-    @Column(name="uploaded")
-    private LocalDateTime uploaded;
+    @Column(name="upload_time")
+    private LocalDateTime uploadTime;
 
     @Column(name="last_download")
     private LocalDateTime lastDownload;
@@ -83,6 +86,14 @@ public class UserFile {
         this.filename = filename;
     }
 
+    public long getSize() {
+        return size;
+    }
+
+    public void setSize(long size) {
+        this.size = size;
+    }
+
     public String getUrl() {
         return url;
     }
@@ -91,12 +102,12 @@ public class UserFile {
         this.url = url;
     }
 
-    public LocalDateTime getUploaded() {
-        return uploaded;
+    public LocalDateTime getUploadTime() {
+        return uploadTime;
     }
 
-    public void setUploaded(LocalDateTime uploaded) {
-        this.uploaded = uploaded;
+    public void setUploadTime(LocalDateTime uploadTime) {
+        this.uploadTime = uploadTime;
     }
 
     public LocalDateTime getLastDownload() {
@@ -149,7 +160,7 @@ public class UserFile {
                 ", url='" + url + '\'' +
                 ", urlId='" + urlId + '\'' +
                 ", serialNumber=" + serialNumber +
-                ", uploaded=" + uploaded +
+                ", uploadTime=" + uploadTime +
                 ", lastDownload=" + lastDownload +
                 ", downloadCount=" + downloadCount +
                 '}';

@@ -27,6 +27,16 @@ public class User {
     @Column(name="enabled")
     private boolean isEnabled;
 
+    @Column(name="storage_space")
+    private long storageSpace;
+
+    @Column(name="file_count")
+    private int fileCount;
+
+    @Column(name="download_count")
+    private long downloadCount;
+
+
     public int getId() {
         return id;
     }
@@ -65,5 +75,41 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         isEnabled = enabled;
+    }
+
+    public long getStorageSpace() {
+        return storageSpace;
+    }
+
+    public void setStorageSpace(long bytes) {
+        this.storageSpace = bytes;
+    }
+
+    public int getFileCount() {
+        return fileCount;
+    }
+
+    public void setFileCount(int fileCount) {
+        this.fileCount = fileCount;
+    }
+
+    public long getDownloadCount() {
+        return downloadCount;
+    }
+
+    public void setDownloadCount(long downloadCount) {
+        this.downloadCount = downloadCount;
+    }
+
+
+    public void incrementFileCount() {
+        this.fileCount++;
+    }
+    public void decrementFileCount() {
+        this.fileCount--;
+    }
+
+    public void incrementDownloadCount() {
+        this.downloadCount++;
     }
 }

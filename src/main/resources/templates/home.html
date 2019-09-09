@@ -10,27 +10,27 @@
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 
     <!-- Begin SEO tag -->
-    <title> Dashboard | Looper - Bootstrap 4 Admin Theme </title>
-    <meta property="og:title" content="Dashboard">
-    <meta name="author" content="Beni Arisandi">
+    <title> My LightShare </title>
+    <meta property="og:title" content="Home">
+    <meta name="author" content="Gergo Kovics">
     <meta property="og:locale" content="en_US">
-    <meta name="description" content="Responsive admin theme build on top of Bootstrap 4">
-    <meta property="og:description" content="Responsive admin theme build on top of Bootstrap 4">
-    <link rel="canonical" href="http://uselooper.com">
-    <meta property="og:url" content="http://uselooper.com">
-    <meta property="og:site_name" content="Looper - Bootstrap 4 Admin Theme">
+    <meta name="description" content="Share your files easily over the web.">
+    <meta property="og:description" content="Share your files easily over the web.">
+    <link rel="canonical" href="http://mylightshare.com">
+    <meta property="og:url" content="http://mylightshare.com">
+    <meta property="og:site_name" content="My LightShare">
     <script type="application/ld+json">
         {
-            "name": "Looper - Bootstrap 4 Admin Theme",
-            "description": "Responsive admin theme build on top of Bootstrap 4",
+            "name": "My LightShare",
+            "description": "Share your files easily over the web.",
             "author":
             {
                 "@type": "Person",
-                "name": "Beni Arisandi"
+                "name": "Gergo Kovics"
             },
             "@type": "WebSite",
-            "url": "",
-            "headline": "Dashboard",
+            "url": "http://mylightshare.com",
+            "headline": "Home",
             "@context": "http://schema.org"
         }
     </script><!-- End SEO tag -->
@@ -61,6 +61,9 @@
     <!--[if lt IE 10]>
     <div class="page-message" role="alert">You are using an <strong>outdated</strong> browser. Please <a class="alert-link" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</div>
     <![endif]-->
+    <div th:if="${message}" class="page-message" style="top:1.5rem" role="alert">
+        <span th:text="${message}"></span><a href="#" class="btn btn-sm btn-icon btn-warning ml-1" aria-label="Close" onclick="$(this).parent().fadeOut()"><span aria-hidden="true"><i class="fa fa-times"></i></span></a>
+    </div>
     <!-- .app-header -->
     <header class="app-header app-header-dark">
         <!-- .top-bar -->
@@ -103,79 +106,12 @@
                     <ul class="header-nav nav">
                         <!-- .nav-item -->
                         <li class="nav-item">
-                            <a class="nav-link" href="#" ><span class="fas fa-arrow-circle-up"></span></a>
-                        </li><!-- /.nav-item -->
-                        <!-- .nav-item -->
-                        <li class="nav-item dropdown header-nav-dropdown has-notified">
-                            <a class="nav-link" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="oi oi-envelope-open"></span></a> <!-- .dropdown-menu -->
-                            <div class="dropdown-menu dropdown-menu-rich dropdown-menu-right">
-                                <div class="dropdown-arrow"></div>
-                                <h6 class="dropdown-header stop-propagation">
-                                    <span>Messages</span> <a href="#">Mark all as read</a>
-                                </h6><!-- .dropdown-scroll -->
-                                <div class="dropdown-scroll perfect-scrollbar">
-                                    <!-- .dropdown-item -->
-                                    <a href="#" class="dropdown-item unread">
-                                        <div class="user-avatar">
-                                            <img src="assets/images/avatars/team1.jpg" alt="">
-                                        </div>
-                                        <div class="dropdown-item-body">
-                                            <p class="subject"> Stilearning </p>
-                                            <p class="text text-truncate"> Invitation: Joe's Dinner @ Fri Aug 22 </p><span class="date">2 hours ago</span>
-                                        </div>
-                                    </a> <!-- /.dropdown-item -->
-                                    <!-- .dropdown-item -->
-                                    <a href="#" class="dropdown-item">
-                                        <div class="user-avatar">
-                                            <img src="assets/images/avatars/team3.png" alt="">
-                                        </div>
-                                        <div class="dropdown-item-body">
-                                            <p class="subject"> Openlane </p>
-                                            <p class="text text-truncate"> Final reminder: Upgrade to Pro </p><span class="date">23 hours ago</span>
-                                        </div>
-                                    </a> <!-- /.dropdown-item -->
-                                    <!-- .dropdown-item -->
-                                    <a href="#" class="dropdown-item">
-                                        <div class="tile tile-circle bg-green"> GZ </div>
-                                        <div class="dropdown-item-body">
-                                            <p class="subject"> Gogo Zoom </p>
-                                            <p class="text text-truncate"> Live healthy with this wireless sensor. </p><span class="date">1 day ago</span>
-                                        </div>
-                                    </a> <!-- /.dropdown-item -->
-                                    <!-- .dropdown-item -->
-                                    <a href="#" class="dropdown-item">
-                                        <div class="tile tile-circle bg-teal"> GD </div>
-                                        <div class="dropdown-item-body">
-                                            <p class="subject"> Gold Dex </p>
-                                            <p class="text text-truncate"> Invitation: Design Review @ Mon Jul 7 </p><span class="date">1 day ago</span>
-                                        </div>
-                                    </a> <!-- /.dropdown-item -->
-                                    <!-- .dropdown-item -->
-                                    <a href="#" class="dropdown-item">
-                                        <div class="user-avatar">
-                                            <img src="assets/images/avatars/team2.png" alt="">
-                                        </div>
-                                        <div class="dropdown-item-body">
-                                            <p class="subject"> Creative Division </p>
-                                            <p class="text text-truncate"> Need some feedback on this please </p><span class="date">2 days ago</span>
-                                        </div>
-                                    </a> <!-- /.dropdown-item -->
-                                    <!-- .dropdown-item -->
-                                    <a href="#" class="dropdown-item">
-                                        <div class="tile tile-circle bg-pink"> LD </div>
-                                        <div class="dropdown-item-body">
-                                            <p class="subject"> Lab Drill </p>
-                                            <p class="text text-truncate"> Our UX exercise is ready </p><span class="date">6 days ago</span>
-                                        </div>
-                                    </a> <!-- /.dropdown-item -->
-                                </div><!-- /.dropdown-scroll -->
-                                <a href="page-messages.html" class="dropdown-footer">All messages <i class="fas fa-fw fa-long-arrow-alt-right"></i></a>
-                            </div><!-- /.dropdown-menu -->
+                            <a class="nav-link" href="#" th:href="@{/upload}" ><span class="fas fa-arrow-circle-up"></span></a>
                         </li><!-- /.nav-item -->
                     </ul><!-- /.nav -->
                     <!-- .btn-account -->
                     <div class="dropdown d-flex">
-                        <button class="btn-account d-none d-md-flex" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="user-avatar user-avatar-md"><img src="assets/images/avatars/profile.jpg" alt=""></span> <span class="account-summary pr-lg-4 d-none d-lg-block"><span class="account-name">Beni Arisandi</span> <span class="account-description">Marketing Manager</span></span></button> <!-- .dropdown-menu -->
+                        <button class="btn-account d-none d-md-flex" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="account-summary pr-lg-4 d-none d-lg-block"><span class="account-name" th:text="${user.getUsername()}"></span></span></button> <!-- .dropdown-menu -->
                         <div class="dropdown-menu">
                             <div class="dropdown-arrow ml-3"></div>
                             <h6 class="dropdown-header d-none d-md-block d-lg-none"> Beni Arisandi </h6><a class="dropdown-item" href="user-profile.html"><span class="dropdown-icon oi oi-person"></span> Profile</a> <a class="dropdown-item" th:href="@{/logout}"><span class="dropdown-icon oi oi-account-logout"></span> Logout</a>
@@ -193,7 +129,7 @@
             <!-- .aside-header -->
             <header class="aside-header d-block d-md-none">
                 <!-- .btn-account -->
-                <button class="btn-account" type="button" data-toggle="collapse" data-target="#dropdown-aside"><span class="user-avatar user-avatar-lg"><img src="assets/images/avatars/profile.jpg" alt=""></span> <span class="account-icon"><span class="fa fa-caret-down fa-lg"></span></span> <span class="account-summary"><span class="account-name">Beni Arisandi</span> <span class="account-description">Marketing Manager</span></span></button> <!-- /.btn-account -->
+                <button class="btn-account" type="button" data-toggle="collapse" data-target="#dropdown-aside"><span class="account-icon"><span class="fa fa-caret-down fa-lg"></span></span> <span class="account-summary"><span class="account-name" th:text="${user.getUsername()}"></span></span></button> <!-- /.btn-account -->
                 <!-- .dropdown-aside -->
                 <div id="dropdown-aside" class="dropdown-aside collapse">
                     <!-- dropdown-items -->
@@ -211,15 +147,15 @@
                     <ul class="menu">
                         <!-- .menu-item -->
                         <li class="menu-item has-active">
-                            <a href="/" class="menu-link"><span class="menu-icon fas fa-home"></span> <span class="menu-text">Home</span></a>
+                            <a href="#" th:href="@{/}" class="menu-link"><span class="menu-icon fas fa-home"></span> <span class="menu-text">Home</span></a>
                         </li><!-- /.menu-item -->
                         <!-- .menu-item -->
                         <li class="menu-item">
-                            <a href="#" class="menu-link"><span class="menu-icon far fa-file"></span> <span class="menu-text">My Files</span> <span class="badge badge-warning">New</span></a>
+                            <a href="#" th:href="@{/files}" class="menu-link"><span class="menu-icon far fa-file"></span> <span class="menu-text">My Files</span></a>
                         </li><!-- /.menu-item -->
                         <!-- .menu-item -->
                         <li class="menu-item">
-                            <a href="/upload" class="menu-link"><span class="menu-icon oi oi-wrench"></span> <span class="menu-text">Upload</span></a>
+                            <a th:href="@{/upload}" class="menu-link"><span class="menu-icon oi oi-wrench"></span> <span class="menu-text">Upload</span></a>
                         </li><!-- /.menu-item -->
                         <!-- .menu-item -->
                         <li class="menu-item">
@@ -254,9 +190,9 @@
                                         <div class="col">
                                             <!-- .metric -->
                                             <a href="user-teams.html" class="metric metric-bordered align-items-center">
-                                                <h2 class="metric-label"> Storage </h2>
+                                                <h2 class="metric-label"> Storage Left</h2>
                                                 <p class="metric-value h3">
-                                                    <sub><i class="oi oi-people"></i></sub> <span class="value">8</span>
+                                                    <sub><i class="oi oi-people"></i></sub> <span th:text="${user.getStorageSpace()}" class="value"></span>
                                                 </p>
                                             </a> <!-- /.metric -->
                                         </div><!-- /metric column -->
@@ -264,9 +200,9 @@
                                         <div class="col">
                                             <!-- .metric -->
                                             <a href="user-projects.html" class="metric metric-bordered align-items-center">
-                                                <h2 class="metric-label"> Files </h2>
+                                                <h2 class="metric-label"> Total Files </h2>
                                                 <p class="metric-value h3">
-                                                    <sub><i class="oi oi-fork"></i></sub> <span class="value">12</span>
+                                                    <sub><i class="oi oi-fork"></i></sub> <span th:text="${user.getFileCount()}" class="value"></span>
                                                 </p>
                                             </a> <!-- /.metric -->
                                         </div><!-- /metric column -->
@@ -274,9 +210,9 @@
                                         <div class="col">
                                             <!-- .metric -->
                                             <a href="user-tasks.html" class="metric metric-bordered align-items-center">
-                                                <h2 class="metric-label"> Downloads </h2>
+                                                <h2 class="metric-label">Total Downloads</h2>
                                                 <p class="metric-value h3">
-                                                    <sub><i class="fa fa-tasks"></i></sub> <span class="value">64</span>
+                                                    <sub><i class="fa fa-tasks"></i></sub> <span th:text="${user.getDownloadCount()}" class="value"></span>
                                                 </p>
                                             </a> <!-- /.metric -->
                                         </div><!-- /metric column -->
@@ -288,65 +224,15 @@
                     <!-- .page-section -->
                     <div class="page-section">
                         <!-- .section-block -->
-                        <div th:if="${#lists.size(popularUserFiles) != 0}" class="section-block">
-                            <header class="page-title-bar">
-                                <p class="lead">
-                                    <span>Popular Files</span>
-                                </p>
-                                <hr>
-                            </header>
-
-                            <div class="row">
-                                <div th:each="userFile : ${popularUserFiles}" th:id="${userFile.getId()} + '-card'" class="col" style="max-width: 320px; min-width: 320px">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h3 th:text="${userFile.getSerializedFilename()}" class="card-title"></h3>
-                                            <p class="card-text">
-                                                Size: - <br>
-                                                Downloads: <strong th:text="${userFile.getDownloadCount()}"></strong> <br>
-                                                Uploaded: <strong th:text="${userFile.getUploaded()}"></strong> <br>
-                                                Last Download: <strong th:text="${userFile.getLastDownload()}"></strong> <br>
-                                            </p>
-
-                                            <hr>
-
-                                            <div th:if="${userFile.getUrlId() == null}">
-                                                <strong hidden th:id="${userFile.getId()} + '-url-string'"></strong>
-
-                                                <hr hidden th:id="${userFile.getId()} + '-url-hr-tag'">
-
-                                                <button th:id="${userFile.getId()} + '-url-generate-btn'" th:attr="onclick=|generateFileURL('${userFile.getId()}')|" class="btn btn-info">Generate URL</button>
-                                                <button th:id="${userFile.getId()} + '-file-delete-btn'" th:attr="onclick=|deleteFile('${userFile.getId()}')|" class="btn btn-danger">Delete File</button>
-
-                                            </div>
-
-                                            <div th:if = "${userFile.getUrlId() != null}">
-                                                <strong th:id="${userFile.getId()} + '-url-string'" th:text="${userFile.getUrl()}"></strong>
-
-                                                <hr th:id="${userFile.getId()} + '-url-hr-tag'">
-
-                                                <button th:id="${userFile.getId()} + '-url-copy-btn'" th:attr="onclick=|copyTextToClipboard('${userFile.getUrl()}')|" class="btn btn-info">Copy URL</button>
-                                                <button th:id="${userFile.getId()} + '-url-remove-btn'" th:attr="onclick=|removeFileURL('${userFile.getId()}')|" class="btn btn-warning">Remove URL</button>
-
-                                            </div>
-
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- /.section-block -->
-                        <!-- .section-block -->
                         <div class="section-block">
                             <header class="page-title-bar">
                                 <p class="lead">
-                                    <span>Recently Uploaded Files</span>
+                                    <span>Recently Uploaded Files</span><span class="text-info" th:text="| (${#lists.size(recentUserFiles)})|"></span>
                                 </p>
                                 <hr>
                             </header>
                             <div th:if="${#lists.size(recentUserFiles) == 0}">
-                                <p>It seems like you don't have any files yet.</p>
+                                <p>It seems like you don't have any recent uploads yet.</p>
                                 <p><a class="btn btn-primary" role="button" href="#" th:href="@{/upload}">Upload Files</a></p>
                             </div>
 
@@ -355,17 +241,17 @@
                                 <div th:each="userFile : ${recentUserFiles}" th:id="${userFile.getId()} + '-card'" class="col" style="max-width: 320px; min-width: 320px">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h3 th:text="${userFile.getSerializedFilename()}" class="card-title"></h3>
+                                            <h3 th:text="${userFile.getFilename()}" class="card-title"></h3>
                                             <p class="card-text">
-                                                Size: - <br>
+                                                Size: <strong th:text="${userFile.getSize()}"></strong><br>
                                                 Downloads: <strong th:text="${userFile.getDownloadCount()}"></strong> <br>
-                                                Uploaded: <strong th:text="${userFile.getUploaded()}"></strong> <br>
+                                                Uploaded: <strong th:text="${userFile.getUploadTime()}"></strong> <br>
                                                 Last Download: <strong th:text="${userFile.getLastDownload()}"></strong> <br>
                                             </p>
 
                                             <hr>
 
-                                            <div th:if="${userFile.getUrlId() == null}">
+                                            <div th:if="${userFile.getUrl() == null}">
                                                 <strong hidden th:id="${userFile.getId()} + '-url-string'"></strong>
 
                                                 <hr hidden th:id="${userFile.getId()} + '-url-hr-tag'">
@@ -375,7 +261,7 @@
 
                                             </div>
 
-                                            <div th:if = "${userFile.getUrlId() != null}">
+                                            <div th:if = "${userFile.getUrl() != null}">
                                                 <strong th:id="${userFile.getId()} + '-url-string'" th:text="${userFile.getUrl()}"></strong>
 
                                                 <hr th:id="${userFile.getId()} + '-url-hr-tag'">
@@ -398,7 +284,7 @@
             </div><!-- /.page -->
         </div><!-- .app-footer -->
         <footer class="app-footer">
-            <ul class="list-inline">
+            <ul hidden class="list-inline">
                 <li class="list-inline-item">
                     <a class="text-muted" href="#">Support</a>
                 </li>
@@ -412,7 +298,7 @@
                     <a class="text-muted" href="#">Terms of Service</a>
                 </li>
             </ul>
-            <div class="copyright"> Copyright © 2018. All right reserved. </div>
+            <div class="copyright">Copyright © <span th:text="${#dates.format(#dates.createNow(), 'yyyy.')}"></span> All right reserved. </div>
         </footer><!-- /.app-footer -->
         <!-- /.wrapper -->
     </main><!-- /.app-main -->
@@ -428,11 +314,12 @@
 <script src="assets/vendor/flatpickr/flatpickr.min.js"></script>
 <script src="assets/vendor/easy-pie-chart/jquery.easypiechart.min.js"></script>
 <script src="assets/vendor/chart.js/Chart.min.js"></script>
-<script src="assets/javascript/pages/userfile-interface.js"></script>
 <!-- END PLUGINS JS -->
 <!-- BEGIN THEME JS -->
 <script src="assets/javascript/theme.min.js"></script> <!-- END THEME JS -->
 <!-- BEGIN PAGE LEVEL JS -->
+
+<script src="assets/javascript/pages/home.js"></script>
  <!-- END PAGE LEVEL JS -->
 </body>
 </html>
