@@ -1,60 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><!-- End Required meta tags -->
-
-    <!-- CSRF tags -->
-    <meta name="_csrf" th:content="${_csrf.token}"/>
-    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-
-    <!-- Begin SEO tag -->
-    <title> Lightshare </title>
-    <meta property="og:title" content="Lightshare">
-    <meta name="author" content="Gergo Kovics">
-    <meta property="og:locale" content="en_US">
-    <meta name="description" content="Share your files easily over the web.">
-    <meta property="og:description" content="Share your files easily over the web.">
-    <link rel="canonical" href="http://mylightshare.com">
-    <meta property="og:url" content="http://mylightshare.com">
-    <meta property="og:site_name" content="Lightshare">
-    <script type="application/ld+json">
-        {
-            "name": "Lightshare",
-            "description": "Share your files easily over the web.",
-            "author":
-            {
-                "@type": "Person",
-                "name": "Gergo Kovics"
-            },
-            "@type": "WebSite",
-            "url": "http://mylightshare.com",
-            "headline": "Lightshare",
-            "@context": "http://schema.org"
-        }
-    </script><!-- End SEO tag -->
-    <!-- FAVICONS -->
-    <link rel="apple-touch-icon" sizes="144x144" href="assets/apple-touch-icon.png">
-    <link rel="shortcut icon" href="assets/favicon.ico">
-    <meta name="theme-color" content="#3063A0"><!-- End FAVICONS -->
-    <!-- GOOGLE FONT -->
-    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet"><!-- End GOOGLE FONT -->
-    <!-- BEGIN PLUGINS STYLES -->
-    <link rel="stylesheet" href="assets/vendor/open-iconic/css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="assets/vendor/fontawesome/css/all.css">
-    <link rel="stylesheet" href="assets/vendor/flatpickr/flatpickr.min.css"><!-- END PLUGINS STYLES -->
-    <!-- BEGIN THEME STYLES -->
-    <link rel="stylesheet" href="assets/stylesheets/theme.min.css" data-skin="default">
-    <link rel="stylesheet" href="assets/stylesheets/theme-dark.min.css" data-skin="dark">
-    <link rel="stylesheet" href="assets/stylesheets/custom.css"><!-- Disable unused skin immediately -->
-    <script>
-      var skin = localStorage.getItem('skin') || 'default';
-      var unusedLink = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');
-      unusedLink.setAttribute('rel', '');
-      unusedLink.setAttribute('disabled', true);
-    </script><!-- END THEME STYLES -->
-</head>
+<head th:replace="fragments/head :: head"></head>
 
 <body>
     <!-- .app-aside -->
@@ -69,7 +15,7 @@
                 <div id="dropdown-aside" class="dropdown-aside collapse">
                     <!-- dropdown-items -->
                     <div class="pb-3">
-                        <a class="dropdown-item" href="user-profile.html"><span class="dropdown-icon oi oi-person"></span> Settings</a> <a class="dropdown-item" th:href="@{/logout}"><span class="dropdown-icon oi oi-account-logout"></span> Logout</a>
+                        <a class="dropdown-item" th:href="@{account-settings}"><span class="dropdown-icon oi oi-person"></span> Settings</a> <a class="dropdown-item" th:href="@{/logout}"><span class="dropdown-icon oi oi-account-logout"></span> Logout</a>
                     </div><!-- /dropdown-items -->
                 </div><!-- /.dropdown-aside -->
             </header><!-- /.aside-header -->
@@ -104,6 +50,26 @@
             </footer><!-- /Skin changer -->
         </div><!-- /.aside-content -->
     </aside><!-- /.app-aside -->
+
+<!-- BEGIN BASE JS -->
+<script th:src="@{/assets/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/assets/vendor/bootstrap/js/popper.min.js}"></script>
+<script th:src="@{/assets/vendor/bootstrap/js/bootstrap.min.js}"></script> <!-- END BASE JS -->
+<!-- BEGIN PLUGINS JS -->
+<script th:src="@{/assets/vendor/pace/pace.min.js}"></script>
+<script th:src="@{/assets/vendor/stacked-menu/stacked-menu.min.js}"></script>
+<script th:src="@{/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js}"></script>
+<script th:src="@{/assets/vendor/flatpickr/flatpickr.min.js}"></script>
+<script th:src="@{/assets/vendor/easy-pie-chart/jquery.easypiechart.min.js}"></script>
+<script th:src="@{/assets/vendor/chart.js/Chart.min.js}"></script>
+<!-- END PLUGINS JS -->
+
+<!-- BEGIN THEME JS -->
+<script th:src="@{/assets/javascript/theme.min.js}"></script>
+<!-- END THEME JS -->
+
+<!-- BEGIN PAGE LEVEL JS -->
+<!-- END PAGE LEVEL JS -->
 
 </body>
 </html>

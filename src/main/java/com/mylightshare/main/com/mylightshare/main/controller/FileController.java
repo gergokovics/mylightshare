@@ -136,6 +136,7 @@ public class FileController {
     @GetMapping("/files/page={pageNumber}")
     public String filePage(@PathVariable int pageNumber, Model model, Authentication auth) {
 
+
         pageNumber -= 1;
 
         final int elementPerPage = 15;
@@ -143,8 +144,13 @@ public class FileController {
         int batchStartIndex = pageNumber * elementPerPage;
         int batchEndIndex = batchStartIndex + (elementPerPage);
 
+        if (userFiles == null) {
+            User user = userRepository.findByUsername(auth.getName());
+            userFiles = userFileService.findByUserIdOrderByUploadedDesc(user.getId());
+        }
+
         if (batchStartIndex > userFiles.size()) {
-            return "file-card-end";
+            return "error";
         }
 
         List<UserFile> userFilesBatch;

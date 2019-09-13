@@ -36,32 +36,32 @@
                                         <!-- metric column -->
                                         <div class="col">
                                             <!-- .metric -->
-                                            <a href="user-teams.html" class="metric metric-bordered align-items-center">
+                                            <div class="metric metric-bordered align-items-center">
                                                 <h2 class="metric-label"> Storage Left</h2>
                                                 <p class="metric-value h3">
                                                     <sub><i class="oi oi-people"></i></sub> <span th:text="${user.getStorageSpace()}" class="value"></span>
                                                 </p>
-                                            </a> <!-- /.metric -->
+                                            </div> <!-- /.metric -->
                                         </div><!-- /metric column -->
                                         <!-- metric column -->
                                         <div class="col">
                                             <!-- .metric -->
-                                            <a href="user-projects.html" class="metric metric-bordered align-items-center">
+                                            <div class="metric metric-bordered align-items-center">
                                                 <h2 class="metric-label"> Total Files </h2>
                                                 <p class="metric-value h3">
                                                     <sub><i class="oi oi-fork"></i></sub> <span th:text="${user.getFileCount()}" class="value"></span>
                                                 </p>
-                                            </a> <!-- /.metric -->
+                                            </div> <!-- /.metric -->
                                         </div><!-- /metric column -->
                                         <!-- metric column -->
                                         <div class="col">
                                             <!-- .metric -->
-                                            <a href="user-tasks.html" class="metric metric-bordered align-items-center">
+                                            <div class="metric metric-bordered align-items-center">
                                                 <h2 class="metric-label">Total Downloads</h2>
                                                 <p class="metric-value h3">
                                                     <sub><i class="fa fa-tasks"></i></sub> <span th:text="${user.getDownloadCount()}" class="value"></span>
                                                 </p>
-                                            </a> <!-- /.metric -->
+                                            </div> <!-- /.metric -->
                                         </div><!-- /metric column -->
                                     </div>
                                 </div><!-- metric column -->
@@ -85,7 +85,7 @@
 
 
                             <div class="row">
-                                <div th:each="userFile : ${recentUserFiles}" th:id="${userFile.getId()} + '-card'" class="col" style="max-width: 320px; min-width: 320px">
+                                <div th:each="userFile : ${recentUserFiles}" th:id="${userFile.getId()} + '-card'" class="col" style="max-width: 340px; min-width: 340px">
                                     <div class="card">
                                         <div class="card-body">
                                             <h3 th:text="${userFile.getFilename()}" class="card-title"></h3>
@@ -136,23 +136,27 @@
 
     </main><!-- /.app-main -->
 </div><!-- /.app -->
-<!-- BEGIN BASE JS -->
-<script src="assets/vendor/jquery/jquery.min.js"></script>
-<script src="assets/vendor/bootstrap/js/popper.min.js"></script>
-<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script> <!-- END BASE JS -->
-<!-- BEGIN PLUGINS JS -->
-<script src="assets/vendor/pace/pace.min.js"></script>
-<script src="assets/vendor/stacked-menu/stacked-menu.min.js"></script>
-<script src="assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<script src="assets/vendor/flatpickr/flatpickr.min.js"></script>
-<script src="assets/vendor/easy-pie-chart/jquery.easypiechart.min.js"></script>
-<script src="assets/vendor/chart.js/Chart.min.js"></script>
-<!-- END PLUGINS JS -->
-<!-- BEGIN THEME JS -->
-<script src="assets/javascript/theme.min.js"></script> <!-- END THEME JS -->
-<!-- BEGIN PAGE LEVEL JS -->
 
-<script src="assets/javascript/pages/home.js"></script>
- <!-- END PAGE LEVEL JS -->
+<!-- BEGIN BASE JS -->
+<script th:src="@{/assets/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/assets/vendor/bootstrap/js/popper.min.js}"></script>
+<script th:src="@{/assets/vendor/bootstrap/js/bootstrap.min.js}"></script> <!-- END BASE JS -->
+<!-- BEGIN PLUGINS JS -->
+<script th:src="@{/assets/vendor/pace/pace.min.js}"></script>
+<script th:src="@{/assets/vendor/stacked-menu/stacked-menu.min.js}"></script>
+<script th:src="@{/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js}"></script>
+<script th:src="@{/assets/vendor/flatpickr/flatpickr.min.js}"></script>
+<script th:src="@{/assets/vendor/easy-pie-chart/jquery.easypiechart.min.js}"></script>
+<script th:src="@{/assets/vendor/chart.js/Chart.min.js}"></script>
+<!-- END PLUGINS JS -->
+
+<!-- BEGIN THEME JS -->
+<script th:src="@{/assets/javascript/theme.min.js}"></script>
+<!-- END THEME JS -->
+
+<!-- BEGIN PAGE LEVEL JS -->
+<script th:src="@{/assets/javascript/pages/home.js}"></script>
+<!-- END PAGE LEVEL JS -->
+
 </body>
 </html>

@@ -65,7 +65,6 @@ public class AppController {
         return "home";
     }
 
-
     private List<UserFileModelAttribute> convertToAttributes(List<UserFile> userFiles) {
 
         List<UserFileModelAttribute> userFileModelAttributes = new ArrayList<>();

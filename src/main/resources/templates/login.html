@@ -166,13 +166,13 @@
 
 
 <!-- BEGIN BASE JS -->
-<script src="assets/vendor/jquery/jquery.min.js"></script>
-<script src="assets/vendor/bootstrap/js/popper.min.js"></script>
-<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script th:src="@{/assets/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/assets/vendor/bootstrap/js/popper.min.js}"></script>
+<script th:src="@{/assets/vendor/bootstrap/js/bootstrap.min.js}"></script>
 <!-- END BASE JS -->
 
 <!-- BEGIN PLUGINS JS -->
-<script src="assets/vendor/particles.js/particles.min.js"></script>
+<script th:src="@{assets/vendor/particles.js/particles.min.js}"></script>
 <script>
 /**
  * Keep in mind that your scripts may not always be executed after the theme is completely ready,
@@ -186,7 +186,7 @@ $(document).on('theme:init', () => {
 <!-- END PLUGINS JS -->
 
 <!-- BEGIN THEME JS -->
-<script src="assets/javascript/theme.js"></script>
+<script th:src="@{assets/javascript/theme.js}"></script>
 <!-- END THEME JS -->
 
 </body>
