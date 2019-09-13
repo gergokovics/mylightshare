@@ -55,7 +55,7 @@ public class FileController {
     @PostMapping("/upload")
     @ResponseBody
     public ResponseEntity<Object> handleFileUpload(@RequestParam("file") MultipartFile file,
-                                                        Authentication auth) throws RuntimeException{
+                                                   Authentication auth) throws RuntimeException{
 
         String uniqueID = Generator.getUniqueID();
 
@@ -240,7 +240,7 @@ public class FileController {
 
 
     // Download file
-    @GetMapping("/{urlId:.+}")
+    @GetMapping("/download/{urlId:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String urlId) {
 
