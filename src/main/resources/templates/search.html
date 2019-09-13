@@ -28,10 +28,16 @@
                         <div class="section-block">
                             <header class="page-title-bar">
                                 <p class="lead">
-                                    <span>Search results</span>
+                                    <span>Search results for </span><span th:text='|"${param.term}"|'></span>
+                                    <span class="text-primary" th:text="| (${user.getFileCount()})|"></span>
                                 </p>
                             </header>
                             <div class="file-container row">
+                                <div th:if="${user.getFileCount() <= 0}">
+                                    <p>
+                                        Sorry, no result was found.
+                                    </p>
+                                </div>
                                 <!-- Auto load elements (infinite-scroll) -->
                             </div>
 

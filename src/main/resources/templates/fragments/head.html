@@ -44,18 +44,13 @@
     <!-- BEGIN PLUGINS STYLES -->
     <link rel="stylesheet" th:href="@{/assets/vendor/open-iconic/css/open-iconic-bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/assets/vendor/fontawesome/css/all.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/flatpickr/flatpickr.min.css}">
     <link rel="stylesheet" th:href="@{/assets/stylesheets/dropzone.css}">
-    <link rel="stylesheet" th:href="@{/assets/vendor/flatpickr/flatpickr.min.css}"><!-- END PLUGINS STYLES -->
+    <!-- END PLUGINS STYLES -->
     <!-- BEGIN THEME STYLES -->
     <link rel="stylesheet" th:href="@{/assets/stylesheets/theme.min.css}" data-skin="default">
-    <link rel="stylesheet" th:href="@{/assets/stylesheets/theme-dark.min.css}" data-skin="dark">
-    <link rel="stylesheet" th:href="@{/assets/stylesheets/custom.css}"><!-- Disable unused skin immediately -->
-    <script>
-      var skin = localStorage.getItem('skin') || 'default';
-      var unusedLink = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');
-      unusedLink.setAttribute('rel', '');
-      unusedLink.setAttribute('disabled', true);
-    </script><!-- END THEME STYLES -->
+    <link rel="stylesheet" th:href="@{/assets/stylesheets/custom.css}">
+
 </head>
 <body>
 

@@ -32,7 +32,7 @@
                             <header class="page-title-bar">
                                 <div class="d-flex flex-column flex-md-row">
                                     <p class="lead">
-                                        <span>My Files</span>
+                                        <span>My Files</span><span class="text-primary" th:text="| (${user.getFileCount()})|"></span>
                                     </p>
                                     <form id="dropdown-sort" method="GET" action="#" th:action="@{files}" class="ml-auto">
                                         <div class="row">
@@ -119,6 +119,11 @@
                                 </div>
                             </header>
                             <div class="file-container row">
+                                <div th:if="${user.getFileCount() <= 0}">
+                                    <p>It seems like you don't have any files yet.</p>
+                                    <p><a class="btn btn-primary" role="button" href="#" th:href="@{/upload}">Upload Files</a></p>
+                                </div>
+
                             <!-- Auto load elements (infinite-scroll) -->
                             </div>
 

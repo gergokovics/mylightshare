@@ -39,7 +39,7 @@
                                             <div class="metric metric-bordered align-items-center">
                                                 <h2 class="metric-label"> Storage Left</h2>
                                                 <p class="metric-value h3">
-                                                    <sub><i class="oi oi-people"></i></sub> <span th:text="${user.getStorageSpace()}" class="value"></span>
+                                                    <sub><i class="fa fa-hdd"></i></sub> <span th:text="${user.getStorageSpace()}" class="value"></span>
                                                 </p>
                                             </div> <!-- /.metric -->
                                         </div><!-- /metric column -->
@@ -49,7 +49,7 @@
                                             <div class="metric metric-bordered align-items-center">
                                                 <h2 class="metric-label"> Total Files </h2>
                                                 <p class="metric-value h3">
-                                                    <sub><i class="oi oi-fork"></i></sub> <span th:text="${user.getFileCount()}" class="value"></span>
+                                                    <sub><i class="far fa-file"></i></sub> <span th:text="${user.getFileCount()}" class="value"></span>
                                                 </p>
                                             </div> <!-- /.metric -->
                                         </div><!-- /metric column -->
@@ -59,7 +59,7 @@
                                             <div class="metric metric-bordered align-items-center">
                                                 <h2 class="metric-label">Total Downloads</h2>
                                                 <p class="metric-value h3">
-                                                    <sub><i class="fa fa-tasks"></i></sub> <span th:text="${user.getDownloadCount()}" class="value"></span>
+                                                    <sub><i class="oi oi-fork"></i></sub> <span th:text="${user.getDownloadCount()}" class="value"></span>
                                                 </p>
                                             </div> <!-- /.metric -->
                                         </div><!-- /metric column -->
@@ -74,7 +74,7 @@
                         <div class="section-block">
                             <header class="page-title-bar">
                                 <p class="lead">
-                                    <span>Recently Uploaded Files</span><span class="text-info" th:text="| (${#lists.size(recentUserFiles)})|"></span>
+                                    <span>Recently Uploaded Files</span><span class="text-primary" th:text="| (${#lists.size(recentUserFiles)})|"></span>
                                 </p>
                                 <hr>
                             </header>

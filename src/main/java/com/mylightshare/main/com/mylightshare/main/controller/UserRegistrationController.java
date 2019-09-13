@@ -10,6 +10,7 @@ import com.mylightshare.main.com.mylightshare.main.service.EmailSenderService;
 import com.mylightshare.main.com.mylightshare.main.service.FileSystemStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,13 +48,15 @@ public class UserRegistrationController {
     private MimeMessage confirmMessage;
 
     @GetMapping("/register")
-    public String register(Model model) {
+    public String register(Model model, Authentication auth) {
+
+        if (auth != null) {
+            return "redirect:/";
+        }
 
         User user = new User();
 
         model.addAttribute("user", user);
-
-        System.out.println("Register page! GET");
 
         return "register";
 
@@ -120,7 +123,12 @@ public class UserRegistrationController {
 
 
     @GetMapping("/confirm-account")
-    public String confirmUserAccount(Model model, @RequestParam("token") String confirmationToken, RedirectAttributes redirectAttributes){
+    public String confirmUserAccount(Model model, @RequestParam("token") String confirmationToken,
+                                     RedirectAttributes redirectAttributes, Authentication auth){
+
+        if (auth != null) {
+            return "redirect:/";
+        }
 
         ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
 

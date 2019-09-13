@@ -42,7 +42,11 @@ public class UserAccountController {
     private AuthorityRepository authorityRepository;
 
     @GetMapping("/login")
-    public String login(Model model) {
+    public String login(Model model, Authentication auth) {
+
+        if (auth != null) {
+            return "redirect:/";
+        }
 
         User user = new User();
 
@@ -115,7 +119,11 @@ public class UserAccountController {
     }
 
     @GetMapping("/password-recovery")
-    public String recoverPassword(Model model) {
+    public String recoverPassword(Model model, Authentication auth) {
+
+        if (auth != null) {
+            return "redirect:/";
+        }
 
         User user = new User();
 

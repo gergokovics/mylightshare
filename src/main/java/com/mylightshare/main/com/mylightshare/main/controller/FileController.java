@@ -117,6 +117,10 @@ public class FileController {
     @GetMapping("/search")
     public String search(@RequestParam("term") String term, Model model, Authentication auth) {
 
+        if( term.length() == 0) {
+            return "redirect:/files";
+        }
+
         User user = userRepository.findByUsername(auth.getName());
         userFiles = userFileService.findAllByUserIdAndSerializedFilenameLike(user.getId(), "%" + term + "%");
 
@@ -126,6 +130,7 @@ public class FileController {
 
         UserModelAttribute userModelAttribute = new UserModelAttribute(user);
         userModelAttribute.setPage("files");
+        userModelAttribute.setFileCount(userFiles.size());
         model.addAttribute("user", userModelAttribute);
 
         return "search";
@@ -239,6 +244,7 @@ public class FileController {
 
         UserModelAttribute userModelAttribute = new UserModelAttribute(user);
         userModelAttribute.setPage("files");
+        userModelAttribute.setFileCount(userFiles.size());
         model.addAttribute("user", userModelAttribute);
 
         return "files";
