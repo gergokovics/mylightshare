@@ -15,12 +15,15 @@ public class UserModelAttribute {
 
     private long downloadCount;
 
+    private String page;
+
     public UserModelAttribute(User user) {
         this.username = user.getUsername();
         this.email = user.getEmail();
         this.storageSpace = Generator.formatFileSize(user.getStorageSpace(),2);
         this.fileCount = user.getFileCount();
         this.downloadCount = user.getDownloadCount();
+        page = "home";
     }
 
     public String getUsername() {
@@ -61,5 +64,13 @@ public class UserModelAttribute {
 
     public void setDownloadCount(long downloadCount) {
         this.downloadCount = downloadCount;
+    }
+
+    public String getPage() {
+        return page;
+    }
+
+    public void setPage(String page) {
+        this.page = page;
     }
 }

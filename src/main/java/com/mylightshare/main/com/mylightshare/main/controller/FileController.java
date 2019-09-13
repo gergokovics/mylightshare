@@ -39,7 +39,14 @@ public class FileController {
     private UserRepository userRepository;
 
     @GetMapping("/upload")
-    public String listUploadedFiles() {
+    public String listUploadedFiles(Model model, Authentication auth) {
+
+        User user = userRepository.findByUsername(auth.getName());
+
+        UserModelAttribute userModelAttribute = new UserModelAttribute(user);
+        userModelAttribute.setPage("upload");
+        model.addAttribute("user", userModelAttribute);
+
         return "upload";
     }
 
@@ -51,6 +58,7 @@ public class FileController {
                                                         Authentication auth) throws RuntimeException{
 
         String uniqueID = Generator.getUniqueID();
+
 
         try {
 
@@ -117,7 +125,7 @@ public class FileController {
         model.addAttribute("userFiles", userFileModelAttributes);
 
         UserModelAttribute userModelAttribute = new UserModelAttribute(user);
-
+        userModelAttribute.setPage("files");
         model.addAttribute("user", userModelAttribute);
 
         return "search";
@@ -153,7 +161,7 @@ public class FileController {
         User user = userRepository.findByUsername(auth.getName());
 
         UserModelAttribute userModelAttribute = new UserModelAttribute(user);
-
+        userModelAttribute.setPage("files");
         model.addAttribute("user", userModelAttribute);
 
         return "file-card";
@@ -224,7 +232,7 @@ public class FileController {
         model.addAttribute("sortForm", sortFeedback);
 
         UserModelAttribute userModelAttribute = new UserModelAttribute(user);
-
+        userModelAttribute.setPage("files");
         model.addAttribute("user", userModelAttribute);
 
         return "files";

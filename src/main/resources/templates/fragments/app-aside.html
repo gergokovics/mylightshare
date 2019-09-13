@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><!-- End Required meta tags -->
+
+    <!-- CSRF tags -->
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <!-- Begin SEO tag -->
+    <title> Lightshare </title>
+    <meta property="og:title" content="Lightshare">
+    <meta name="author" content="Gergo Kovics">
+    <meta property="og:locale" content="en_US">
+    <meta name="description" content="Share your files easily over the web.">
+    <meta property="og:description" content="Share your files easily over the web.">
+    <link rel="canonical" href="http://mylightshare.com">
+    <meta property="og:url" content="http://mylightshare.com">
+    <meta property="og:site_name" content="Lightshare">
+    <script type="application/ld+json">
+        {
+            "name": "Lightshare",
+            "description": "Share your files easily over the web.",
+            "author":
+            {
+                "@type": "Person",
+                "name": "Gergo Kovics"
+            },
+            "@type": "WebSite",
+            "url": "http://mylightshare.com",
+            "headline": "Lightshare",
+            "@context": "http://schema.org"
+        }
+    </script><!-- End SEO tag -->
+    <!-- FAVICONS -->
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/apple-touch-icon.png">
+    <link rel="shortcut icon" href="assets/favicon.ico">
+    <meta name="theme-color" content="#3063A0"><!-- End FAVICONS -->
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet"><!-- End GOOGLE FONT -->
+    <!-- BEGIN PLUGINS STYLES -->
+    <link rel="stylesheet" href="assets/vendor/open-iconic/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="assets/vendor/fontawesome/css/all.css">
+    <link rel="stylesheet" href="assets/vendor/flatpickr/flatpickr.min.css"><!-- END PLUGINS STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <link rel="stylesheet" href="assets/stylesheets/theme.min.css" data-skin="default">
+    <link rel="stylesheet" href="assets/stylesheets/theme-dark.min.css" data-skin="dark">
+    <link rel="stylesheet" href="assets/stylesheets/custom.css"><!-- Disable unused skin immediately -->
+    <script>
+      var skin = localStorage.getItem('skin') || 'default';
+      var unusedLink = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');
+      unusedLink.setAttribute('rel', '');
+      unusedLink.setAttribute('disabled', true);
+    </script><!-- END THEME STYLES -->
+</head>
+
+<body>
+    <!-- .app-aside -->
+    <aside class="app-aside app-aside-expand-md app-aside-light" th:fragment="aside">
+        <!-- .aside-content -->
+        <div class="aside-content">
+            <!-- .aside-header -->
+            <header class="aside-header d-block d-md-none">
+                <!-- .btn-account -->
+                <button class="btn-account" type="button" data-toggle="collapse" data-target="#dropdown-aside"><span class="account-icon"><span class="fa fa-caret-down fa-lg"></span></span> <span class="account-summary"><span class="account-name" th:text="${user.getUsername()}"></span><span class="account-description">My Account</span></span></button> <!-- /.btn-account -->
+                <!-- .dropdown-aside -->
+                <div id="dropdown-aside" class="dropdown-aside collapse">
+                    <!-- dropdown-items -->
+                    <div class="pb-3">
+                        <a class="dropdown-item" href="user-profile.html"><span class="dropdown-icon oi oi-person"></span> Settings</a> <a class="dropdown-item" th:href="@{/logout}"><span class="dropdown-icon oi oi-account-logout"></span> Logout</a>
+                    </div><!-- /dropdown-items -->
+                </div><!-- /.dropdown-aside -->
+            </header><!-- /.aside-header -->
+            <!-- .aside-menu -->
+            <div class="aside-menu overflow-hidden">
+                <!-- .stacked-menu -->
+                <nav id="stacked-menu" class="stacked-menu">
+                    <!-- .menu -->
+                    <ul class="menu">
+                        <!-- .menu-item -->
+                        <li class="menu-item" th:classappend="${user.page.equals('home')} ? 'has-active'">
+                            <a href="#" th:href="@{/}" class="menu-link"><span class="menu-icon fas fa-home"></span> <span class="menu-text">Home</span></a>
+                        </li><!-- /.menu-item -->
+                        <!-- .menu-item -->
+                        <li class="menu-item" th:classappend="${user.page.equals('files')} ? 'has-active'">
+                            <a href="#" th:href="@{/files}" class="menu-link"><span class="menu-icon far fa-file"></span> <span class="menu-text">My Files</span></a>
+                        </li><!-- /.menu-item -->
+                        <!-- .menu-item -->
+                        <li class="menu-item" th:classappend="${user.page.equals('upload')} ? 'has-active'">
+                            <a th:href="@{/upload}" class="menu-link"><span class="menu-icon fas fa-arrow-alt-circle-up"></span> <span class="menu-text">Upload</span></a>
+                        </li><!-- /.menu-item -->
+                        <!-- .menu-item -->
+                        <li class="menu-item" th:classappend="${user.page.equals('account-settings')} ? 'has-active'">
+                            <a th:href="@{/account-settings}" class="menu-link"><span class="menu-icon oi oi-wrench"></span> <span class="menu-text">Settings</span></a>
+                        </li><!-- /.menu-item -->
+                    </ul><!-- /.menu -->
+                </nav><!-- /.stacked-menu -->
+            </div><!-- /.aside-menu -->
+            <!-- Skin changer -->
+            <footer class="aside-footer border-top p-3">
+                <button class="btn btn-light btn-block text-primary" data-toggle="skin">Night mode <i class="fas fa-moon ml-1"></i></button>
+            </footer><!-- /Skin changer -->
+        </div><!-- /.aside-content -->
+    </aside><!-- /.app-aside -->
+
+</body>
+</html>

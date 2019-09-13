@@ -58,8 +58,9 @@ public class AppController {
         model.addAttribute("recentUserFiles", userFileModelAttributes);
 
         UserModelAttribute userModelAttribute = new UserModelAttribute(user);
-
+        userModelAttribute.setPage("home");
         model.addAttribute("user", userModelAttribute);
+
 
         return "home";
     }

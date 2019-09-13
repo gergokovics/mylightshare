@@ -4,6 +4,7 @@ import com.mylightshare.main.com.mylightshare.main.dao.AuthorityRepository;
 import com.mylightshare.main.com.mylightshare.main.dao.UserRepository;
 import com.mylightshare.main.com.mylightshare.main.entity.User;
 import com.mylightshare.main.com.mylightshare.main.formview.AccountUpdateForm;
+import com.mylightshare.main.com.mylightshare.main.modelattribute.UserModelAttribute;
 import com.mylightshare.main.com.mylightshare.main.service.EmailSenderService;
 import com.mylightshare.main.com.mylightshare.main.util.Generator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +76,10 @@ public class UserAccountController {
         accountUpdateForm.setUsername(user.getUsername());
 
         model.addAttribute("accountUpdateForm", accountUpdateForm);
+
+        UserModelAttribute userModelAttribute = new UserModelAttribute(user);
+        userModelAttribute.setPage("account-settings");
+        model.addAttribute("user", userModelAttribute);
 
         return "account-settings";
     }
