@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.mylightshare</groupId>
 	<artifactId>main</artifactId>
-	<version>0.9.5-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>war</packaging>
 	<name>main</name>
 	<description>File Sharing System</description>
@@ -20,6 +20,7 @@
 	</properties>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>

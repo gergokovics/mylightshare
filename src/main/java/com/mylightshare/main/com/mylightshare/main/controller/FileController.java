@@ -59,6 +59,7 @@ public class FileController {
 
         String uniqueID = Generator.getUniqueID();
 
+        UserFile userFile;
 
         try {
 
@@ -81,7 +82,7 @@ public class FileController {
                 user.setStorageSpace(storageSpaceLeft);
             }
 
-            UserFile userFile = new UserFile();
+            userFile = new UserFile();
             userFile.setUserId(user.getId());
 
             userFile.setOriginalFilename(file.getOriginalFilename());
@@ -110,7 +111,7 @@ public class FileController {
             throw new RuntimeException("Failed to save user file");
         }
 
-        return ResponseEntity.ok("Successful upload");
+        return ResponseEntity.ok(userFile.getId());
     }
 
     // Search file
@@ -302,8 +303,6 @@ public class FileController {
         userRepository.save(user);
 
         return "Successfully deleted file with id: " + id;
-
-
 
     }
 

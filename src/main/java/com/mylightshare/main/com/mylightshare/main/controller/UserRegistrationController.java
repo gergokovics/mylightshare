@@ -136,13 +136,13 @@ public class UserRegistrationController {
             User user = userRepository.findByUsername(token.getUser().getUsername());
             user.setEnabled(true);
             userRepository.save(user);
-            model.addAttribute("confirmMessage", "Your email has been verified!");
-        } else {
-            model.addAttribute("confirmMessage", "Invalid token!");
-        }
 
-        redirectAttributes.addFlashAttribute("message",
-                "Account confirmed! You can log in now with your username and password.");
+            redirectAttributes.addFlashAttribute("message",
+                    "Account confirmed! You can log in now with your username and password.");
+        } else {
+            redirectAttributes.addFlashAttribute("message",
+                    "Failed to confirm your account! Maybe it is already confirmed?");
+        }
 
         return "redirect:/login";
     }

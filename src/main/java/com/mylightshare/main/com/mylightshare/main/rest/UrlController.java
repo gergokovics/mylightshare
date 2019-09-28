@@ -5,14 +5,11 @@ import com.mylightshare.main.com.mylightshare.main.service.StorageService;
 import com.mylightshare.main.com.mylightshare.main.service.UserFileService;
 import com.mylightshare.main.com.mylightshare.main.util.Generator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@org.springframework.web.bind.annotation.RestController
+@RestController
 @RequestMapping("/rest")
-public class RestController {
+public class UrlController {
 
     @Autowired
     private UserFileService userFileService;
