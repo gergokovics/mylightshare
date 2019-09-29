@@ -89,13 +89,18 @@ public class UserAccountController {
     }
 
     @PostMapping("/account-settings")
-    public String accountUpdate(@Valid @ModelAttribute AccountUpdateForm accountUpdateForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String accountUpdate(Model model, @Valid @ModelAttribute AccountUpdateForm accountUpdateForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         User user = userRepository.findByEmailIgnoreCase(accountUpdateForm.getEmail());
         
         validateUserUpdate(user, accountUpdateForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
+
+            UserModelAttribute userModelAttribute = new UserModelAttribute(user);
+            userModelAttribute.setPage("account-settings");
+            model.addAttribute("user", userModelAttribute);
+
             return "account-settings";
         } else {
             

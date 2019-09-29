@@ -1,10 +1,8 @@
 package com.mylightshare.main.controller;
 
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,7 +29,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FileControllerTest {
 
     @Autowired
@@ -101,7 +98,7 @@ public class FileControllerTest {
 
     @Test
     public void downloadGet_shouldReturnJsonWithOkStatus() throws Exception {
-        mvc.perform(get("/download/Vw6i6mek")
+        mvc.perform(get("/download/ik5fw18K")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -125,7 +122,7 @@ public class FileControllerTest {
         MvcResult result = resultActions.andReturn();
         String mockFileId = result.getResponse().getContentAsString();
 
-        mvc.perform(delete("/" + mockFileId)
+        mvc.perform(delete("/files/" + mockFileId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .sessionAttr(TOKEN_ATTR_NAME, csrfToken)
                 .param(csrfToken.getParameterName(), csrfToken.getToken()))

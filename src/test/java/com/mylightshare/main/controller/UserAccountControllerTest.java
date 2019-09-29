@@ -106,7 +106,7 @@ public class UserAccountControllerTest {
         AccountUpdateForm accountUpdateForm = new AccountUpdateForm();
 
         accountUpdateForm.setUsername("testuser");
-        accountUpdateForm.setEmail("kovics.gergo@gmail.com");
+        accountUpdateForm.setEmail("mylightshare@gmail.com");
         accountUpdateForm.setNewPassword("testpass");
         accountUpdateForm.setCurrentPassword("testpass");
 

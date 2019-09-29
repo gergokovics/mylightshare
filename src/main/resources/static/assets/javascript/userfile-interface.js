@@ -10,6 +10,9 @@ $(document).ready(function() {
 
 function removeFileURL(id) {
 
+    $('#' + id + '-url-remove-btn').attr('disabled', true);
+    $('#' + id + '-url-copy-btn').attr('disabled', true);
+
     $.ajax({
         url: '/rest/urls/' + id,
         type: 'DELETE',
@@ -24,12 +27,14 @@ function removeFileURL(id) {
         $('#' + deleteBtnId).html('Delete File');
         $('#' + deleteBtnId).attr('class', 'btn btn-danger');
         $('#' + deleteBtnId).attr('onclick', 'deleteFile(' + id + ')');
+        $('#' + deleteBtnId).attr('disabled', false);
 
         var generateBtnId = id + '-url-generate-btn';
         $('#' + id + '-url-copy-btn').attr('id', generateBtnId);
 
         $('#' + generateBtnId).html('Generate URL');
         $('#' + generateBtnId).attr('onclick', 'generateFileURL(' + id + ')');
+        $('#' + generateBtnId).attr('disabled', false);
 
     });
 
@@ -37,8 +42,11 @@ function removeFileURL(id) {
 
 function deleteFile(id) {
 
+        $('#' + id + '-file-delete-btn').attr('disabled', true);
+        $('#' + id + '-url-generate-btn').attr('disabled', true);
+
         $.ajax({
-            url: '/' + id,
+            url: '/files/' + id,
             type: 'DELETE',
         }).done(function( msg ) {
             $('#' + id + '-card').hide(200);
@@ -47,6 +55,9 @@ function deleteFile(id) {
 }
 
 function generateFileURL(id) {
+
+    $('#' + id + '-url-generate-btn').attr('disabled', true);
+    $('#' + id + '-file-delete-btn').attr('disabled', true);
 
     $.ajax({
         url: '/rest/urls/' + id,
@@ -61,12 +72,15 @@ function generateFileURL(id) {
         $('#' + removeBtnId).html('Remove URL');
         $('#' + removeBtnId).attr('class', 'btn btn-warning');
         $('#' + removeBtnId).attr('onclick', 'removeFileURL(' + id + ')');
+        $('#' + removeBtnId).attr('disabled', false);
 
         var copyBtnId = id + '-url-copy-btn';
         $('#' + id + '-url-generate-btn').attr('id', copyBtnId);
 
         $('#' + copyBtnId).html('Copy URL');
         $('#' + copyBtnId).attr('onclick', "copyTextToClipboard('" + newUrl + "')");
+        $('#' + copyBtnId).attr('disabled', false);
+
 
         // TODO clean this code
         $('#' + id + '-url-string').hide();
@@ -85,6 +99,7 @@ function generateFileURL(id) {
 function fallbackCopyTextToClipboard(text) {
   var textArea = document.createElement("textarea");
   textArea.value = text;
+  textArea.style.position = "fixed";
   document.body.appendChild(textArea);
   textArea.focus();
   textArea.select();

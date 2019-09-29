@@ -109,8 +109,6 @@ public class FileController {
 
             userFileService.save(userFile);
 
-
-
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Failed to save user file");
@@ -282,7 +280,7 @@ public class FileController {
                 "attachment; filename=\"" + userFile.getSerializedFilename() + "\"").body(file);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/files/{id}")
     @ResponseBody
     public String deleteUserFile(@PathVariable int id) {
 

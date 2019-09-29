@@ -9,6 +9,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @EnableConfigurationProperties(StorageProperties.class)
 public class MainApplication {
 
+	public static final String APPLICATION_URL = "http://mylightshare.com";
 
 	public static void main(String[] args) {
 		SpringApplication.run(MainApplication.class, args);

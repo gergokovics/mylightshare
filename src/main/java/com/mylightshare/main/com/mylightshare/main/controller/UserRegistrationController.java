@@ -1,5 +1,6 @@
 package com.mylightshare.main.com.mylightshare.main.controller;
 
+import com.mylightshare.main.MainApplication;
 import com.mylightshare.main.com.mylightshare.main.dao.AuthorityRepository;
 import com.mylightshare.main.com.mylightshare.main.dao.ConfirmationTokenRepository;
 import com.mylightshare.main.com.mylightshare.main.dao.UserRepository;
@@ -28,7 +29,6 @@ import javax.validation.Valid;
 
 @Controller
 public class UserRegistrationController {
-
 
     @Autowired
     private UserRepository userRepository;
@@ -118,7 +118,7 @@ public class UserRegistrationController {
         messageHelper.setTo(user.getEmail());
         messageHelper.setSubject("Email Verification");
         messageHelper.setText("To confirm your account, please click here: "
-                + "http://localhost:8080/confirm-account?token=" + confirmationToken.getConfirmationToken());
+                + MainApplication.APPLICATION_URL +"/confirm-account?token=" + confirmationToken.getConfirmationToken());
     }
 
 
