@@ -41,6 +41,11 @@ public class Generator {
         return Url;
     }
 
+
+    public static String getAmazonDownloadUrl(String bucket, String key) {
+        return "http://"+bucket+".s3.amazonaws.com/"+key;
+    }
+
     public static String formatFileSize(double bytes, int digits) {
         String[] dictionary = {"bytes", "KB", "MB", "GB"};
         int i = 0;

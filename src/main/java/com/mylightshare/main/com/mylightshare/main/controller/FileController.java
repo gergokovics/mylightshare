@@ -7,6 +7,7 @@ import com.mylightshare.main.com.mylightshare.main.exception.StorageFileNotFound
 import com.mylightshare.main.com.mylightshare.main.formview.SortForm;
 import com.mylightshare.main.com.mylightshare.main.modelattribute.UserFileModelAttribute;
 import com.mylightshare.main.com.mylightshare.main.modelattribute.UserModelAttribute;
+import com.mylightshare.main.com.mylightshare.main.service.AmazonS3ClientService;
 import com.mylightshare.main.com.mylightshare.main.service.StorageService;
 import com.mylightshare.main.com.mylightshare.main.service.UserFileService;
 import com.mylightshare.main.com.mylightshare.main.util.Generator;
@@ -37,6 +38,9 @@ public class FileController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private AmazonS3ClientService amazonS3ClientService;
 
     @GetMapping("/upload")
     public String listUploadedFiles(Model model, Authentication auth) {
@@ -82,6 +86,8 @@ public class FileController {
                 user.setStorageSpace(storageSpaceLeft);
             }
 
+            amazonS3ClientService.uploadFileToS3Bucket(file, uniqueID, true);
+
             userFile = new UserFile();
             userFile.setUserId(user.getId());
 
@@ -103,7 +109,6 @@ public class FileController {
 
             userFileService.save(userFile);
 
-            storageService.store(file, uniqueID);
 
 
         } catch (Exception e) {
@@ -265,7 +270,7 @@ public class FileController {
 
         userFileService.save(userFile);
 
-        Resource file = storageService.loadAsResource(userFile.getFilename());
+        Resource file = amazonS3ClientService.loadResourceFromS3Bucket(userFile.getFilename());
 
         User user = userRepository.findById(userFile.getUserId());
 
@@ -283,7 +288,7 @@ public class FileController {
 
         UserFile userFile = userFileService.findById(id);
 
-        boolean isDeleted = storageService.delete(userFile.getFilename());
+        boolean isDeleted = amazonS3ClientService.deleteFileFromS3Bucket(userFile.getFilename());
 
         if (!isDeleted) {
             return "Failed to delete file";
