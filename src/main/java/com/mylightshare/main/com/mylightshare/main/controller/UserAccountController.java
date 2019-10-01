@@ -147,6 +147,11 @@ public class UserAccountController {
             bindingResult.addError(error);
 
             return "password-recovery";
+        } else if (user.getUsername().equals("testuser")) {
+            ObjectError error = new FieldError("user", "email", "Sorry, password for the account \"" + user.getEmail()+ "\" cannot be reset!");
+            bindingResult.addError(error);
+
+            return "password-recovery";
         } else {
 
             String tmpPassword = Generator.getUniqueID(12);
@@ -194,6 +199,17 @@ public class UserAccountController {
 
     private void validateUserUpdate(User user, AccountUpdateForm accountUpdateForm, BindingResult bindingResult) {
 
+        // Check if user is "testuser"
+        if (user.getUsername().equalsIgnoreCase("testuser")) {
+            String message = "Sorry, account settings for \"" + user.getUsername() + "\" cannot be modified.";
+            ObjectError error =
+                    new FieldError("accountUpdateForm", "username", message);
+
+            bindingResult.addError(error);
+
+            return;
+        }
+
         // Check if current password is correct
         String inputPassword = accountUpdateForm.getCurrentPassword();
 
@@ -220,7 +236,7 @@ public class UserAccountController {
         String updatedUsername = accountUpdateForm.getUsername().toLowerCase();
 
         if (!username.equals(updatedUsername)) {
-            User existingUser = userRepository.findByUsername(accountUpdateForm.getUsername());
+            User existingUser = userRepository.findByUsername(updatedUsername);
             // Check if new username is taken
             if (existingUser != null) {
                 ObjectError error = new FieldError("accountUpdateForm", "username",
