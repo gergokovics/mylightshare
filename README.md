@@ -9,4 +9,4 @@ Please note that this project is still in development and is only intended for t
 If you do not wish to create an account, you can log in with the following credentials:
 
 Username: testuser
-Password: testpass
+Password: mylightshare-test
